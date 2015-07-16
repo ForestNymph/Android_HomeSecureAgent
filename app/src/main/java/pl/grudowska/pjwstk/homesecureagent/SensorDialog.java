@@ -15,22 +15,8 @@ import java.util.ArrayList;
 public class SensorDialog extends android.support.v4.app.DialogFragment {
 
     private ArrayList mSelectedItems = null;
-    private String[] sensors = null;
-    ArrayAdapter<String> itemsAdapter = null;
-
-/*    @Nullable
-    @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-
-        View root = inflater.inflate(R.layout.sensor_list_dialog, container, false);
-
-        sensors = getResources().getStringArray(R.array.sensors_list);
-        itemsAdapter = new ArrayAdapter<String>(getActivity(), R.layout.sensor_row_dialog, sensors);
-
-        ListView listView = (ListView) root.findViewById(R.id.action_sensors_dialog);
-        listView.setAdapter(itemsAdapter);
-        return super.onCreateView(inflater, container, savedInstanceState);
-    }*/
+    private String[] mSensorsList = null;
+    private ArrayAdapter<String> mItemsAdapter = null;
 
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
@@ -80,7 +66,21 @@ public class SensorDialog extends android.support.v4.app.DialogFragment {
         });
         builder.setIcon(R.drawable.test);
 
+        // builder.setView(configureDialogView());
+
         // Create the AlertDialog object and return it
         return builder.create();
     }
+
+/*    private View configureDialogView() {
+        View view = getActivity().getLayoutInflater().inflate(R.layout.sensor_list_dialog, null);
+
+        mSensorsList = getResources().getStringArray(R.array.sensors_list);
+        mItemsAdapter = new ArrayAdapter<String>(this.getActivity(), R.layout.sensor_row_dialog, mSensorsList);
+
+        ListView listView = (ListView) view.findViewById(R.id.list_sensors);
+        listView.setAdapter(mItemsAdapter);
+
+        return view;
+    }*/
 }

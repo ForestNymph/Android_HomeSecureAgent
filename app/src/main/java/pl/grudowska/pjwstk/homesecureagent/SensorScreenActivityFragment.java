@@ -15,9 +15,19 @@ public class SensorScreenActivityFragment extends Fragment {
     public SensorScreenActivityFragment() {
     }
 
+    // To provide a layout for a fragment, you must implement the onCreateView() callback method,
+    // which the Android system calls when it's time for the fragment to draw its layout.
+    // Your implementation of this method
+    // must return a View that is the root of your fragment's layout.
+    // The container parameter passed to onCreateView() is the parent ViewGroup
+    // (from the activity's layout) in which your fragment layout will be inserted.
+    // The savedInstanceState parameter is a Bundle that provides data about
+    // the previous instance of the fragment, if the fragment is being resumed
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+        // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_sensor_screen, container, false);
     }
 

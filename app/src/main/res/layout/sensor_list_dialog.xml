@@ -5,11 +5,9 @@
     android:orientation="vertical">
 
     <ListView
-        android:id="@android:id/list"
+        android:id="@+id/list_sensors"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:smoothScrollbar="true"
-        android:textColor="#6C8AF8"
-        android:cacheColorHint="#6C8AF8"/>
+        android:textColor="#6C8AF8" />
 
 </LinearLayout>
