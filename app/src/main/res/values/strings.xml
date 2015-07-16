@@ -1,0 +1,17 @@
+<resources>
+    <string name="app_name">Home Secure Agent</string>
+    <string name="action_settings">Settings</string>
+    <string name="action_sensors_dialog">Sensors</string>
+    <string name="apply_dialog">Apply</string>
+    <string name="cancel_dialog">Cancel</string>
+    <string name="sensors">Sensors List</string>
+    <string-array name="sensors_list">
+        <item>Temperature</item>
+        <item>Humidity</item>
+        <item>Gas</item>
+        <item>Smoke</item>
+        <item>Carbon monoxide</item>
+        <item>Distance</item>
+        <item>Motion</item>
+    </string-array>
+</resources>
