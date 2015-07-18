@@ -4,7 +4,9 @@ import android.app.Dialog;
 import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
+import android.view.View;
 import android.widget.ArrayAdapter;
+import android.widget.ListView;
 
 import java.util.ArrayList;
 
@@ -26,7 +28,7 @@ public class SensorDialog extends android.support.v4.app.DialogFragment {
 
         // Use the Builder class for convenient dialog construction
         // 1. Instantiate an AlertDialog.Builder with its constructor
-        AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+        AlertDialog.Builder builder = new AlertDialog.Builder(getActivity(), R.style.MyDialogTheme);
 
         // Get the layout inflater
         // LayoutInflater inflater = getActivity().getLayoutInflater();
@@ -64,15 +66,14 @@ public class SensorDialog extends android.support.v4.app.DialogFragment {
                 // Do nothing
             }
         });
-        builder.setIcon(R.drawable.test);
-
+        // builder.setIcon(R.drawable.icon_inside_app);
         // builder.setView(configureDialogView());
 
         // Create the AlertDialog object and return it
         return builder.create();
     }
 
-/*    private View configureDialogView() {
+    private View configureDialogView() {
         View view = getActivity().getLayoutInflater().inflate(R.layout.sensor_list_dialog, null);
 
         mSensorsList = getResources().getStringArray(R.array.sensors_list);
@@ -82,5 +83,5 @@ public class SensorDialog extends android.support.v4.app.DialogFragment {
         listView.setAdapter(mItemsAdapter);
 
         return view;
-    }*/
+    }
 }
