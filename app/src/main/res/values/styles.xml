@@ -6,9 +6,9 @@
     -->
 
     <!-- Base application theme. -->
-    <style name="CustomAppTheme" parent="Theme.AppCompat.Light">
+    <style name="CustomAppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
         <item name="android:actionBarStyle">@style/MyActionBar</item>
-        <item name="android:icon">@drawable/icon_green</item>
+        <item name="android:icon">@drawable/icon_orange</item>
         <item name="android:alertDialogStyle">@style/MyDialogTheme</item>
         <item name="android:typeface">monospace</item>
 
@@ -31,7 +31,8 @@
 
     <!-- ActionBar title text -->
     <style name="MyActionBarTitleText" parent="@style/TextAppearance.AppCompat.Widget.ActionBar.Title">
-        <item name="android:textColor">#FFA500</item>
+        <!-- <item name="android:textColor">#FFA500</item>-->
+        <item name="android:textColor">#f2efe3</item>
         <item name="android:textStyle">bold</item>
 
         <!-- The textColor property is backward compatible with the Support Library -->
@@ -41,11 +42,11 @@
         <!-- Used for the buttons -->
         <item name="colorAccent">#FFA500</item>
         <!-- Used for the title and text -->
-        <item name="android:textColorPrimary">#FFFFFF</item>
+        <!--        <item name="android:textColorPrimary">#f2efe3</item>-->
         <!-- Used for the background -->
         <item name="android:background">#29343c</item>
         <!-- Used for the list element only -->
-        <item name="textColorAlertDialogListItem">#FFFFFF</item>
+        <item name="textColorAlertDialogListItem">#f2efe3</item>
         <!--    <item name="android:textStyle">bold</item>-->
         <item name="android:textSize">18dp</item>
 
