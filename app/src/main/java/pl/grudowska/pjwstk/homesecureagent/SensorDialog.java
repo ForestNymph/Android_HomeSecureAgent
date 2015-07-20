@@ -11,12 +11,12 @@ import android.widget.ListView;
 import java.util.ArrayList;
 
 /**
- * Created by s.grudowska on 15.07.2015.
+ * Created by s.grudowska on 15.07.2015
  */
 //https://github.com/codepath/android_guides/wiki/Using-an-ArrayAdapter-with-ListView
 public class SensorDialog extends android.support.v4.app.DialogFragment {
 
-    private ArrayList mSelectedItems = null;
+    private ArrayList<Integer> mSelectedItems = null;
     private String[] mSensorsList = null;
     private ArrayAdapter<String> mItemsAdapter = null;
 
@@ -56,7 +56,9 @@ public class SensorDialog extends android.support.v4.app.DialogFragment {
 
         builder.setPositiveButton(R.string.apply_dialog, new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int id) {
-
+                SensorScreenActivity callingActivity = (SensorScreenActivity) getActivity();
+                callingActivity.onUserSelectValues(mSelectedItems);
+                dialog.dismiss();
             }
         });
 

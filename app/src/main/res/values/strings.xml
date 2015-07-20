@@ -19,10 +19,9 @@
         <item>Motion</item>
     </string-array>
     message_about
-    <string name="message_about">Application is an integral part with the
-        Arduino platform of connected sensors.
-        It presents a readable and processed data to assess the state of the
-        environment where the device with sensors is.\n\n
+    <string name="message_about">The application is an integral part of the Arduino platform
+        with a system of connected sensors. It processes and presents the sensor data from
+        the environment allowing for assessing its state and condition.\n\n
         Version: 1.0.0\n
         Author: Sylwia Grudowska</string>
 </resources>

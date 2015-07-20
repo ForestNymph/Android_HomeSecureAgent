@@ -6,6 +6,9 @@ import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.Toast;
+
+import java.util.ArrayList;
 
 public class SensorScreenActivity extends AppCompatActivity {
 
@@ -44,6 +47,17 @@ public class SensorScreenActivity extends AppCompatActivity {
             default:
                 return super.onOptionsItemSelected(item);
         }
+    }
+
+    /**
+     * callback method from SensorDialog (fragment), returning the value of user
+     * input.
+     *
+     * @param selectedValues value returned from SensorDialog. array of selected checkboxes.
+     */
+    public void onUserSelectValues(ArrayList<Integer> selectedValues) {
+        Toast.makeText(this, "index " + selectedValues.get(0).toString(),Toast.LENGTH_LONG).show();
+        // TODO add your implementation.
     }
 
     public void restoreActionBar() {
