@@ -5,7 +5,7 @@ import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 
 /**
- * Created by s.grudowska on 12.07.2015.
+ * Created by s.grudowska on 12.07.2015
  */
 public class DataConnectionStatus {
 

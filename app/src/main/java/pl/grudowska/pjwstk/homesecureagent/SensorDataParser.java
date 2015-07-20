@@ -40,8 +40,8 @@ public class SensorDataParser {
         String tempValue = parseSensorData(SensorEnum.TEMPERATURE, 0);
         RangeOfSensor.isCorrectRange(SensorEnum.TEMPERATURE, tempValue);
 
-        String humadityValue = parseSensorData(SensorEnum.HUMADITY, 0);
-        RangeOfSensor.isCorrectRange(SensorEnum.HUMADITY, humadityValue);
+        String humadityValue = parseSensorData(SensorEnum.HUMIDITY, 0);
+        RangeOfSensor.isCorrectRange(SensorEnum.HUMIDITY, humadityValue);
 
         //TODO Add all sensors
 

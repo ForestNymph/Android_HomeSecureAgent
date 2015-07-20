@@ -5,8 +5,10 @@
     <string name="action_update">Refresh rate</string>
     <string name="acton_notification">Notifications</string>
     <string name="apply_dialog">Apply</string>
+    <string name="apply_about_dialog">Ok</string>
     <string name="cancel_dialog">Cancel</string>
     <string name="sensors">Sensors List</string>
+    <string name="about">About</string>
     <string-array name="sensors_list">
         <item>Temperature</item>
         <item>Humidity</item>
@@ -16,4 +18,11 @@
         <item>Distance</item>
         <item>Motion</item>
     </string-array>
+    message_about
+    <string name="message_about">Application is an integral part with the
+        Arduino platform of connected sensors.
+        It presents a readable and processed data to assess the state of the
+        environment where the device with sensors is.\n\n
+        Version: 1.0.0\n
+        Author: Sylwia Grudowska</string>
 </resources>

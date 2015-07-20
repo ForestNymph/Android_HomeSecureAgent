@@ -7,7 +7,7 @@ import java.io.InputStreamReader;
 import java.net.URL;
 
 /**
- * Created by s.grudowska on 11.07.2015.
+ * Created by s.grudowska on 11.07.2015
  */
 public class DataDownloader {
 

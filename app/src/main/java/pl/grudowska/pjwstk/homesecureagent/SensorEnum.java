@@ -1,17 +1,21 @@
 package pl.grudowska.pjwstk.homesecureagent;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 /**
- * Created by s.grudowska on 12.07.2015.
+ * Created by s.grudowska on 12.07.2015
  */
+
+
 public enum SensorEnum {
+
     TEMPERATURE("Temperature"),
-    HUMADITY("humadity"),
+    HUMIDITY("Humidity"),
     GAS("Gas"),
     SMOKE("Smoke"),
-    CARBON_MONOXIDE("Carbon_monoxide"),
+    CARBON_MONOXIDE("Carbon Monoxide"),
     DISTANCE("Distance"),
     MOTION("Motion");
 
@@ -27,7 +31,9 @@ public enum SensorEnum {
     }
 
     public static List getSensorList() {
-        List<SensorEnum> enums = new ArrayList<SensorEnum>();
+
+        // Create ArrayList of enum values
+        ArrayList enums = new ArrayList<SensorEnum>(Arrays.asList(SensorEnum.values()));
         return enums;
     }
 }

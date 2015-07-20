@@ -28,7 +28,8 @@ public class SensorScreenActivity extends AppCompatActivity {
         // Handle action bar item clicks here.
         switch (item.getItemId()) {
             case R.id.action_about:
-                // About option clicked.
+                DialogFragment about = new AboutDialog();
+                about.show(getSupportFragmentManager(), "");
                 return true;
             case R.id.action_update:
                 // Update option clicked.

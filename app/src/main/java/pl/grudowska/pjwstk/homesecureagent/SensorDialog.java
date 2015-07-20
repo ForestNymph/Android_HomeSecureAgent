@@ -28,7 +28,7 @@ public class SensorDialog extends android.support.v4.app.DialogFragment {
 
         // Use the Builder class for convenient dialog construction
         // 1. Instantiate an AlertDialog.Builder with its constructor
-        AlertDialog.Builder builder = new AlertDialog.Builder(getActivity(), R.style.MyDialogTheme);
+        AlertDialog.Builder builder = new AlertDialog.Builder(getActivity(), R.style.MyAlertDialogTheme);
 
         // Get the layout inflater
         // LayoutInflater inflater = getActivity().getLayoutInflater();
