@@ -4,11 +4,26 @@
     tools:context=".SensorScreenActivity">
     <item
         android:id="@+id/action_sensors_dialog"
-        android:title="@string/action_sensors_dialog"
-        app:showAsAction="withText|ifRoom" />
-    <item
-        android:id="@+id/action_settings"
         android:orderInCategory="100"
-        android:title="@string/action_settings"
+        android:title="@string/action_sensors_dialog"
+        app:showAsAction="never" />
+    <!--app:showAsAction="withText|ifRoom" />-->
+
+    <item
+        android:id="@+id/action_update"
+        android:orderInCategory="100"
+        android:title="@string/action_update"
+        app:showAsAction="never" />
+
+    <item
+        android:id="@+id/action_notification"
+        android:orderInCategory="100"
+        android:title="@string/acton_notification"
+        app:showAsAction="never" />
+
+    <item
+        android:id="@+id/action_about"
+        android:orderInCategory="100"
+        android:title="@string/action_about"
         app:showAsAction="never" />
 </menu>

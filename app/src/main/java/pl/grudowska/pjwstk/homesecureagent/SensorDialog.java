@@ -77,7 +77,7 @@ public class SensorDialog extends android.support.v4.app.DialogFragment {
         View view = getActivity().getLayoutInflater().inflate(R.layout.sensor_list_dialog, null);
 
         mSensorsList = getResources().getStringArray(R.array.sensors_list);
-        mItemsAdapter = new ArrayAdapter<String>(this.getActivity(), R.layout.sensor_row_dialog, mSensorsList);
+        mItemsAdapter = new ArrayAdapter<String>(this.getActivity(), R.layout.sensor_list_row, mSensorsList);
 
         ListView listView = (ListView) view.findViewById(R.id.list_sensors);
         listView.setAdapter(mItemsAdapter);

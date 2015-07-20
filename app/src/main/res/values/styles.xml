@@ -1,64 +1,81 @@
 <resources>
-
-    <!--https://developer.android.com/intl/zh-CN/training/basics/actionbar/styling.html-->
-    <!--
-        https://chromium.googlesource.com/android_tools/+/master/sdk/extras/android/support/v7/appcompat/res/
-    -->
+    <!-- Comment:
+        'android:' prefix is required for lollipop devices, android version 21,22
+        For android version < 21 we should add support library compatibility adding preferences names
+        without prefix 'android:'
+        guide: http://developer.android.com/intl/zh-CN/guide/topics/ui/themes.html -->
 
     <!-- Base application theme. -->
     <style name="CustomAppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
-        <item name="android:actionBarStyle">@style/MyActionBar</item>
-        <item name="android:icon">@drawable/icon_orange</item>
-        <item name="android:alertDialogStyle">@style/MyDialogTheme</item>
-        <item name="android:typeface">monospace</item>
 
-        <!-- Support library compatibility -->
+        <item name="android:actionBarStyle">@style/MyActionBar</item>
+        <item name="android:alertDialogStyle">@style/MyDialogTheme</item>
+        <!-- <item name="android:actionOverflowButtonStyle">@style/OverflowActionBar</item> -->
+        <item name="android:typeface">normal</item>
+
+        <!-- Support library compatibility for <21 version-->
         <item name="actionBarStyle">@style/MyActionBar</item>
         <item name="alertDialogStyle">@style/MyDialogTheme</item>
+        <!-- <item name="actionOverflowButtonStyle">@style/OverflowActionBar</item> -->
     </style>
 
-    <!-- ActionBar styles -->
+    <!-- ActionBar style -->
     <style name="MyActionBar" parent="@style/Widget.AppCompat.ActionBar">
         <item name="android:titleTextStyle">@style/MyActionBarTitleText</item>
         <item name="android:background">@drawable/grey</item>
+        <item name="android:displayOptions">showHome|showTitle</item>
 
         <!-- Support library compatibility -->
         <item name="titleTextStyle">@style/MyActionBarTitleText</item>
-
-        <!-- Support library compatibility -->
         <item name="background">@drawable/grey</item>
+        <item name="displayOptions">showHome|showTitle</item>
     </style>
 
     <!-- ActionBar title text -->
     <style name="MyActionBarTitleText" parent="@style/TextAppearance.AppCompat.Widget.ActionBar.Title">
-        <!-- <item name="android:textColor">#FFA500</item>-->
         <item name="android:textColor">#f2efe3</item>
-        <item name="android:textStyle">bold</item>
-
         <!-- The textColor property is backward compatible with the Support Library -->
+        <!-- <item name="android:textStyle">bold</item> -->
     </style>
 
+    <!-- AlertDialog style -->
     <style name="MyDialogTheme" parent="@style/Theme.AppCompat.Dialog.Alert">
-        <!-- Used for the buttons -->
+        <!-- Used for the buttons, checkboxes -->
         <item name="colorAccent">#FFA500</item>
+        <!--Orange: #FFA500-->
+
         <!-- Used for the title and text -->
-        <!--        <item name="android:textColorPrimary">#f2efe3</item>-->
+        <!-- <item name="android:textColorPrimary">#f2efe3</item> -->
+
         <!-- Used for the background -->
         <item name="android:background">#29343c</item>
+
         <!-- Used for the list element only -->
         <item name="textColorAlertDialogListItem">#f2efe3</item>
-        <!--    <item name="android:textStyle">bold</item>-->
+
+        <!-- <item name="android:textStyle">bold</item> -->
         <item name="android:textSize">18dp</item>
 
         <item name="android:windowTitleStyle">@style/MyTitleTextStyle</item>
     </style>
 
+    <!-- AlertDialog title style -->
     <style name="MyTitleTextStyle">
         <item name="android:textColor">#FFA500</item>
         <item name="android:textAppearance">@style/TextAppearance.AppCompat.Title</item>
         <item name="android:textSize">22dp</item>
-        <item name="android:textStyle">bold</item>
+        <!-- <item name="android:textStyle">bold</item>-->
     </style>
 
+    <!-- OverflowActionBar style -->
+    <style name="OverflowActionBar" parent="Widget.AppCompat.ActionButton.Overflow">
+        <item name="android:src">@drawable/overflow32</item>
+    </style>
+
+    <!-- Splashscreen style -->
+    <!-- The delay of the splash screen depends on the start up time of the application -->
+    <style name="splashScreenTheme" parent="Theme.AppCompat.Light.NoActionBar">
+        <item name="android:windowBackground">@drawable/splashscreen</item>
+    </style>
 </resources>
 

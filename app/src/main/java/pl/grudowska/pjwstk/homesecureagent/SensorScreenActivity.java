@@ -15,7 +15,6 @@ public class SensorScreenActivity extends AppCompatActivity {
         setContentView(R.layout.activity_sensor_screen);
     }
 
-
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
@@ -26,36 +25,31 @@ public class SensorScreenActivity extends AppCompatActivity {
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-
-        int id = item.getItemId();
-
-        if (item.getItemId() == R.id.action_sensors_dialog) {
-            //Toast.makeText(this, "Dialog sensor box", Toast.LENGTH_SHORT).show();
-
-            DialogFragment dialog = new SensorDialog();
-            dialog.show(getSupportFragmentManager(), "");
-
-            return true;
+        // Handle action bar item clicks here.
+        switch (item.getItemId()) {
+            case R.id.action_about:
+                // About option clicked.
+                return true;
+            case R.id.action_update:
+                // Update option clicked.
+                return true;
+            case R.id.action_notification:
+                // Notification option clicked.
+                return true;
+            case R.id.action_sensors_dialog:
+                DialogFragment dialog = new SensorDialog();
+                dialog.show(getSupportFragmentManager(), "");
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
         }
-        // noinspection SimplifiableIfStatement
-        else if (id == R.id.action_settings) {
-            return true;
-        }
-
-        return super.onOptionsItemSelected(item);
     }
 
     public void restoreActionBar() {
         ActionBar actionBar = getSupportActionBar();
         actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_STANDARD);
         actionBar.setDisplayShowTitleEnabled(true);
-        // actionBar.setTitle(mTitle);
-        // TODO zmienilam zeby zawsze bylo sensors zamiast wybranego pojedynczego czujnika
-        // actionBar.setTitle("Sensors");
-        // To nie dziala
-        // actionBar.setIcon(R.drawable.wifigreen);
+        // getSupportActionBar().setDisplayShowHomeEnabled(true);
+        getSupportActionBar().setIcon(R.mipmap.icon_orange);
     }
 }
