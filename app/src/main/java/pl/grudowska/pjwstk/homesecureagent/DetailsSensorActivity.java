@@ -22,7 +22,7 @@ public class DetailsSensorActivity extends AppCompatActivity {
             // During initial setup, plug in the sensor details fragment.
             DetailsSensorFragment details = new DetailsSensorFragment();
             details.setArguments(getIntent().getExtras());
-            getSupportFragmentManager().beginTransaction().add(R.id.content_fragment, details).commit();
+            getSupportFragmentManager().beginTransaction().add(R.id.detail_content_fragment, details).commit();
         }
         restoreActionBar();
     }

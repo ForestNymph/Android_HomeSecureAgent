@@ -1,5 +1,6 @@
 package pl.grudowska.pjwstk.homesecureagent;
 
+import android.app.Activity;
 import android.app.Dialog;
 import android.content.DialogInterface;
 import android.os.Bundle;
@@ -13,12 +14,23 @@ import java.util.ArrayList;
 /**
  * Created by s.grudowska on 15.07.2015
  */
-//https://github.com/codepath/android_guides/wiki/Using-an-ArrayAdapter-with-ListView
+// https://github.com/codepath/android_guides/wiki/Using-an-ArrayAdapter-with-ListView
+// http://stackoverflow.com/questions/12622742/get-value-from-dialogfragment
+// http://stackoverflow.com/questions/10905312/receive-result-from-dialogfragment
+// http://developer.android.com/intl/zh-CN/guide/components/fragments.html#CommunicatingWithActivity
 public class SensorDialog extends android.support.v4.app.DialogFragment {
 
     private ArrayList<Integer> mSelectedItems = null;
     private String[] mSensorsList = null;
     private ArrayAdapter<String> mItemsAdapter = null;
+
+    // Interface object
+    public OnCheckboxSelectedListener mListener;
+
+    // Container Activity must implement this interface
+    public interface OnCheckboxSelectedListener {
+        void onCheckboxSelected(ArrayList<Integer> checkedbox);
+    }
 
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
@@ -56,8 +68,10 @@ public class SensorDialog extends android.support.v4.app.DialogFragment {
 
         builder.setPositiveButton(R.string.apply_dialog, new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int id) {
-                SensorScreenActivity callingActivity = (SensorScreenActivity) getActivity();
-                callingActivity.onUserSelectValues(mSelectedItems);
+                // SensorScreenActivity callingActivity = (SensorScreenActivity) getActivity();
+                // callingActivity.onUserSelectValues(mSelectedItems);
+
+                mListener.onCheckboxSelected(mSelectedItems);
                 dialog.dismiss();
             }
         });
@@ -75,10 +89,21 @@ public class SensorDialog extends android.support.v4.app.DialogFragment {
         return builder.create();
     }
 
+    @Override
+    public void onAttach(Activity activity) {
+        super.onAttach(activity);
+        try {
+            mListener = (OnCheckboxSelectedListener) activity;
+        } catch (ClassCastException e) {
+            throw new ClassCastException(activity.toString() + " must implement OnCheckboxSelectedListener");
+        }
+    }
+
     private View configureDialogView() {
         View view = getActivity().getLayoutInflater().inflate(R.layout.sensor_list_dialog, null);
 
-        mSensorsList = getResources().getStringArray(R.array.sensors_list);
+        mSensorsList = (String[]) Sensor.SensorType.getSensorList().toArray();
+        //getResources().getStringArray(R.array.sensors_list);
         mItemsAdapter = new ArrayAdapter<String>(this.getActivity(), R.layout.sensor_list_row, mSensorsList);
 
         ListView listView = (ListView) view.findViewById(R.id.list_sensors);

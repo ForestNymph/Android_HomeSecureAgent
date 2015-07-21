@@ -2,20 +2,26 @@ package pl.grudowska.pjwstk.homesecureagent;
 
 import android.os.Bundle;
 import android.support.v4.app.DialogFragment;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.widget.Toast;
 
 import java.util.ArrayList;
 
-public class SensorScreenActivity extends AppCompatActivity {
+//http://simpledeveloper.com/how-to-communicate-between-fragments-and-activities/
+
+public class SensorScreenActivity extends AppCompatActivity implements SensorDialog.OnCheckboxSelectedListener {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sensor_screen);
+
+        ListSensorFragment listfragment = new ListSensorFragment();
+        getSupportFragmentManager().beginTransaction().
+                add(R.id.list_content_fragment, listfragment, "list_fragment").commit();
     }
 
     @Override
@@ -49,15 +55,32 @@ public class SensorScreenActivity extends AppCompatActivity {
         }
     }
 
-    /**
-     * callback method from SensorDialog (fragment), returning the value of user
-     * input.
-     *
-     * @param selectedValues value returned from SensorDialog. array of selected checkboxes.
-     */
-    public void onUserSelectValues(ArrayList<Integer> selectedValues) {
-        Toast.makeText(this, "index " + selectedValues.get(0).toString(),Toast.LENGTH_LONG).show();
-        // TODO add your implementation.
+    // Callback method to communicate between fragments (SensorDialog and ListSensorFragment)
+    // User change set of sensor in SensorDialog, then view in ListSensorFragment should refresh
+    @Override
+    public void onCheckboxSelected(ArrayList<Integer> checkedbox) {
+
+        // Passing data between fragments
+        Bundle args = new Bundle();
+        args.putIntegerArrayList("checkbox", checkedbox);
+
+        ListSensorFragment fragment = new ListSensorFragment();
+
+        /**
+         * Supply the construction arguments for this fragment.  This can only
+         * be called before the fragment has been attached to its activity; that
+         * is, you should call it immediately after constructing the fragment.  The
+         * arguments supplied here will be retained across fragment destroy and
+         * creation.
+         */
+        fragment.setArguments(args);
+
+        FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+        // Replace whatever is in the fragment_container view with this fragment
+        transaction.replace(R.id.list_content_fragment, fragment);
+
+        // Commit the transaction
+        transaction.commit();
     }
 
     public void restoreActionBar() {
@@ -67,4 +90,13 @@ public class SensorScreenActivity extends AppCompatActivity {
         // getSupportActionBar().setDisplayShowHomeEnabled(true);
         getSupportActionBar().setIcon(R.mipmap.icon_orange);
     }
+/*
+    Callback method from SensorDialog (fragment), returning the value of user
+    input. Replaced by the recommended Interface to talk back to the activity.
+    @param selectedValues value returned from SensorDialog. array of selected checkboxes.
+
+    public void onUserSelectValues(ArrayList<Integer> selectedValues) {
+        Toast.makeText(this, "index " + selectedValues.get(0).toString(), Toast.LENGTH_LONG).show();
+    }
+*/
 }

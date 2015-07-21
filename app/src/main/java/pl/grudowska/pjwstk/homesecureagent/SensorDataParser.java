@@ -37,11 +37,11 @@ public class SensorDataParser {
         // range checking sensors
         RangeOfSensor range = new RangeOfSensor();
 
-        String tempValue = parseSensorData(SensorEnum.TEMPERATURE, 0);
-        RangeOfSensor.isCorrectRange(SensorEnum.TEMPERATURE, tempValue);
+        String tempValue = parseSensorData(Sensor.SensorType.TEMPERATURE, 0);
+        RangeOfSensor.isCorrectRange(Sensor.SensorType.TEMPERATURE, tempValue);
 
-        String humadityValue = parseSensorData(SensorEnum.HUMIDITY, 0);
-        RangeOfSensor.isCorrectRange(SensorEnum.HUMIDITY, humadityValue);
+        String humadityValue = parseSensorData(Sensor.SensorType.HUMIDITY, 0);
+        RangeOfSensor.isCorrectRange(Sensor.SensorType.HUMIDITY, humadityValue);
 
         //TODO Add all sensors
 
