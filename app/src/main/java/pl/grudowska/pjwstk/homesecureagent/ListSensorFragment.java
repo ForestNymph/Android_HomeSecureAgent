@@ -6,7 +6,6 @@ import android.support.v4.app.ListFragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
 import java.util.ArrayList;
@@ -21,7 +20,6 @@ public class ListSensorFragment extends ListFragment {
 
     private int mCurCheckPosition = 0;
 
-
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
@@ -33,19 +31,12 @@ public class ListSensorFragment extends ListFragment {
         Bundle bundle = this.getArguments();
         if (bundle == null) {
             // Populate list with static array of sensor types
-            //setListAdapter(new SensorsAdapter(getActivity(), R.layout.sensor_list_row, Sensor.SensorType.getSensorList()));
             setListAdapter(new SensorsAdapter(getActivity(), R.layout.sensor_list_row, Sensor.sensorDataCreator()));
-/*            setListAdapter(new ArrayAdapter(getActivity(),
-                    android.R.layout.simple_list_item_activated_1, Sensor.SensorType.getSensorList()));*/
         } else {
             ArrayList<Integer> checkboxPositions = bundle.getIntegerArrayList("checkbox");
-            List sensor = parseCheckboxIndexToListString(checkboxPositions);
-            // Populated list with sensors choosed by user
-            setListAdapter(new ArrayAdapter(getActivity(),
-                    android.R.layout.simple_list_item_activated_1, sensor));
-            // mSensorDataAdapter.notifyDataSetChanged();
+            ArrayList<Sensor> sensor = (ArrayList<Sensor>) parseSelectedSensors(checkboxPositions);
+            setListAdapter(new SensorsAdapter(getActivity(), R.layout.sensor_list_row, sensor));
         }
-        //Toast.makeText(getActivity(), "onActivityCreated", Toast.LENGTH_LONG).show();
     }
 
     @Override
@@ -55,7 +46,7 @@ public class ListSensorFragment extends ListFragment {
             Toast.makeText(getActivity(), "dupa", Toast.LENGTH_LONG).show();
         }*/
 
-
+        // mSensorDataAdapter.notifyDataSetChanged();
         return super.onCreateView(inflater, container, savedInstanceState);
     }
 
@@ -83,13 +74,15 @@ public class ListSensorFragment extends ListFragment {
         startActivity(intent);
     }
 
-    private List<String> parseCheckboxIndexToListString(ArrayList index) {
+    // Method to get only sensor selected by user
+    private List<Sensor> parseSelectedSensors(ArrayList index) {
 
-        ArrayList sensor = Sensor.SensorType.getSensorList();
-        ArrayList newSensorList = new ArrayList();
+        ArrayList<Sensor> sensor = Sensor.sensorDataCreator();
+        ArrayList<Sensor> newSensorList = new ArrayList();
 
         for (int i = 0; i < index.size(); ++i) {
-            newSensorList.add(sensor.get((int) index.get(i)));
+            Sensor s = sensor.get(0);
+            newSensorList.add(sensor.get((int)index.get(i)));
         }
         return newSensorList;
     }

@@ -5,9 +5,7 @@ import android.app.Dialog;
 import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
-import android.view.View;
 import android.widget.ArrayAdapter;
-import android.widget.ListView;
 
 import java.util.ArrayList;
 
@@ -97,18 +95,5 @@ public class SensorDialog extends android.support.v4.app.DialogFragment {
         } catch (ClassCastException e) {
             throw new ClassCastException(activity.toString() + " must implement OnCheckboxSelectedListener");
         }
-    }
-
-    private View configureDialogView() {
-        View view = getActivity().getLayoutInflater().inflate(R.layout.sensor_list_dialog, null);
-
-        mSensorsList = (String[]) Sensor.SensorType.getSensorList().toArray();
-        //getResources().getStringArray(R.array.sensors_list);
-        mItemsAdapter = new ArrayAdapter<String>(this.getActivity(), R.layout.sensor_list_row, mSensorsList);
-
-        ListView listView = (ListView) view.findViewById(R.id.list_sensors);
-        listView.setAdapter(mItemsAdapter);
-
-        return view;
     }
 }

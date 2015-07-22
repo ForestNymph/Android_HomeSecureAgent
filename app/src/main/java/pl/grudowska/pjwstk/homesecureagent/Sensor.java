@@ -1,7 +1,6 @@
 package pl.grudowska.pjwstk.homesecureagent;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 
 /**
  * Created by s.grudowska on 18.07.2015
@@ -27,17 +26,6 @@ public class Sensor {
         @Override
         public String toString() {
             return stringSensor;
-        }
-
-        public static ArrayList getSensorList() {
-            // Create ArrayList of enum values
-            ArrayList enums = new ArrayList<>(Arrays.asList(SensorType.values()));
-            ArrayList sensors = new ArrayList();
-
-            for (int i = 0; i < enums.size(); ++i) {
-                sensors.add(i, enums.get(i).toString());
-            }
-            return sensors;
         }
     }
 
@@ -90,11 +78,11 @@ public class Sensor {
     }
 
     static ArrayList sensorDataCreator() {
-        ArrayList sensorArray = new ArrayList();
+        ArrayList<Sensor> sensorArray = new ArrayList();
 
         Sensor temp = new Sensor("Temperature", "25℃", "Normal", R.drawable.icon_temperature);
         Sensor humidity = new Sensor("Humidity", "78%", "High", R.drawable.icon_humidity);
-        Sensor gas = new Sensor("Gas", "1034", "Warning", R.drawable.icon_gas);
+        Sensor gas = new Sensor("Gas", "---", "Warning", R.drawable.icon_gas);
         Sensor smoke = new Sensor("Smoke", "---", "Warning", R.drawable.icon_smokefire);
         Sensor carbon_monoxide = new Sensor("Carbon Monoxide", "---", "Warning", R.drawable.icon_co2);
         Sensor distance = new Sensor("Distance", "---", "Warning", R.drawable.icon_distance);

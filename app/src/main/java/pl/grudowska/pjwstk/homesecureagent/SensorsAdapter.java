@@ -28,7 +28,7 @@ public class SensorsAdapter extends ArrayAdapter<Sensor> {
     public View getView(int position, View convertView, ViewGroup parent) {
 
         View rowView = convertView;
-        ViewHolder view = null;
+        ViewHolder view;
 
         if (rowView == null) {
             // Get a new instance of the row layout view
@@ -46,6 +46,8 @@ public class SensorsAdapter extends ArrayAdapter<Sensor> {
             view = (ViewHolder) rowView.getTag();
         }
         // Set data to views
+        int p = position;
+
         Sensor sensor = mSensor.get(position);
         view.sensor_name.setText(sensor.getNameSensor());
         view.sensor_value.setText(sensor.getValueSensor());
