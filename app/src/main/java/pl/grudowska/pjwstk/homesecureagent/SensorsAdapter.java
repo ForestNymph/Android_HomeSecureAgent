@@ -1,7 +1,6 @@
 package pl.grudowska.pjwstk.homesecureagent;
 
 import android.content.Context;
-import android.graphics.drawable.Drawable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,32 +15,50 @@ import java.util.ArrayList;
  */
 public class SensorsAdapter extends ArrayAdapter<Sensor> {
 
-    public SensorsAdapter(Context context, ArrayList<Sensor> sensors) {
-        super(context, 0, sensors);
+    private ArrayList<Sensor> mSensor;
+
+    // row layout - textViewResourceId
+    public SensorsAdapter(Context context, int textViewResourceId, ArrayList<Sensor> sensors) {
+        super(context, textViewResourceId, sensors);
+        mSensor = sensors;
     }
 
+    // getView method defines how each list item will be look
     @Override
-    public View getView(int position, View rowView, ViewGroup parent) {
+    public View getView(int position, View convertView, ViewGroup parent) {
 
-        // Get the data item for this position
-        Sensor sensor = getItem(position);
+        View rowView = convertView;
+        ViewHolder view = null;
 
-        // Check if an existing view is being reused, otherwise inflate the view
         if (rowView == null) {
+            // Get a new instance of the row layout view
             rowView = LayoutInflater.from(getContext()).inflate(R.layout.sensor_list_row, parent, false);
+
+            // Hold the view objects in an ViewHolder object
+            view = new ViewHolder();
+            view.sensor_name = (TextView) rowView.findViewById(R.id.textview_sensorname);
+            view.sensor_value = (TextView) rowView.findViewById(R.id.textview_sensorvalue);
+            view.sensor_string_status = (TextView) rowView.findViewById(R.id.textview_sensorstatus);
+            view.sensor_image = (ImageView) rowView.findViewById(R.id.imageview_sensorimage);
+
+            rowView.setTag(view);
+        } else {
+            view = (ViewHolder) rowView.getTag();
         }
+        // Set data to views
+        Sensor sensor = mSensor.get(position);
+        view.sensor_name.setText(sensor.getNameSensor());
+        view.sensor_value.setText(sensor.getValueSensor());
+        view.sensor_string_status.setText(sensor.getStatusSensor());
+        view.sensor_image.setImageResource(sensor.getImageSensor());
 
-        // Lookup view for data population
-        ImageView sensorImage = (ImageView) rowView.findViewById(R.id.image_sensor);
-        TextView sensorName = (TextView) rowView.findViewById(R.id.textview_sensorname);
-        TextView sensorValue = (TextView) rowView.findViewById(R.id.textview_sensorvalue);
-
-        // Populate the data into the template view using the data object
-        sensorName.setText(sensor.getNameSensor());
-        sensorValue.setText(sensor.getValueSensor());
-        sensorImage.setImageDrawable(Drawable.createFromPath("/home/sylwia/Desktop/HSA_App/HomeSecureAgent/app/src/main/res/drawable/icon_orange.png"));
-
-        // Return the completed view to render on screen
         return rowView;
+    }
+
+    protected static class ViewHolder {
+        protected TextView sensor_name;
+        protected TextView sensor_value;
+        protected TextView sensor_string_status;
+        protected ImageView sensor_image;
     }
 }

@@ -21,6 +21,7 @@ public class ListSensorFragment extends ListFragment {
 
     private int mCurCheckPosition = 0;
 
+
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
@@ -32,8 +33,10 @@ public class ListSensorFragment extends ListFragment {
         Bundle bundle = this.getArguments();
         if (bundle == null) {
             // Populate list with static array of sensor types
-            setListAdapter(new ArrayAdapter(getActivity(),
-                    android.R.layout.simple_list_item_activated_1, Sensor.SensorType.getSensorList()));
+            //setListAdapter(new SensorsAdapter(getActivity(), R.layout.sensor_list_row, Sensor.SensorType.getSensorList()));
+            setListAdapter(new SensorsAdapter(getActivity(), R.layout.sensor_list_row, Sensor.sensorDataCreator()));
+/*            setListAdapter(new ArrayAdapter(getActivity(),
+                    android.R.layout.simple_list_item_activated_1, Sensor.SensorType.getSensorList()));*/
         } else {
             ArrayList<Integer> checkboxPositions = bundle.getIntegerArrayList("checkbox");
             List sensor = parseCheckboxIndexToListString(checkboxPositions);
@@ -47,6 +50,12 @@ public class ListSensorFragment extends ListFragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+/*        ListView lv = getListView();
+        if(lv == null) {
+            Toast.makeText(getActivity(), "dupa", Toast.LENGTH_LONG).show();
+        }*/
+
+
         return super.onCreateView(inflater, container, savedInstanceState);
     }
 

@@ -1,24 +1,58 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical">
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="100dp"
+    android:orientation="horizontal"
+    android:background="#ff9046"
+    android:padding="10dp">
 
-    <ImageView
-        android:id="@+id/image_sensor"
-        android:layout_width="20dp"
-        android:layout_height="20dp" />
+    <!-- Sensor image -->
+    <LinearLayout
+        android:id="@+id/thumbnail"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_marginEnd="5dp"
+        android:padding="3dp">
 
+        <ImageView
+            android:id="@+id/imageview_sensorimage"
+            android:layout_width="80dip"
+            android:layout_height="70dip" />
+    </LinearLayout>
+
+    <!-- Sensor name -->
     <TextView
         android:id="@+id/textview_sensorname"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Sensor name" />
+        android:layout_alignTop="@+id/thumbnail"
+        android:layout_toEndOf="@+id/thumbnail"
+        android:textColor="#2f2f2f"
+        android:textSize="22sp"
+        android:textStyle="bold"/>
 
+    <!-- Sensor value -->
     <TextView
         android:id="@+id/textview_sensorvalue"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/textview_sensorname"
+        android:layout_marginTop="1dip"
+        android:layout_toEndOf="@+id/thumbnail"
+        android:textColor="#343434"
+        android:textSize="20sp" />
+
+    <!-- Sensor Status -->
+    <TextView
+        android:id="@+id/textview_sensorstatus"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Sensor value" />
-</LinearLayout>
-
+        android:layout_alignBottom="@id/textview_sensorvalue"
+        android:layout_alignParentEnd="true"
+        android:layout_marginEnd="5dip"
+        android:gravity="end"
+        android:textColor="#fff"
+        android:textSize="20sp"
+        android:textStyle="bold" />
+</RelativeLayout>
