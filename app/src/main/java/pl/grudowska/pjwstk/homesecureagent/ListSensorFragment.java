@@ -1,6 +1,5 @@
 package pl.grudowska.pjwstk.homesecureagent;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.ListFragment;
 import android.view.LayoutInflater;
@@ -25,7 +24,7 @@ public class ListSensorFragment extends ListFragment {
         super.onActivityCreated(savedInstanceState);
 
         //Get indexes last saved list from SharedPreferences if exists
-        ArrayList<Integer> selectedSensors = ConfigurationStateManager.loadConfiguration(getActivity());
+        ArrayList<Integer> selectedSensors = ConfigurationStateStoreManager.loadConfiguration(getActivity());
         if (selectedSensors != null) {
             ArrayList<Sensor> sensors = (ArrayList<Sensor>) parseSelectedSensors(selectedSensors);
             setListAdapter(new SensorsAdapter(getActivity(), R.layout.sensor_list_row, sensors));
@@ -58,11 +57,12 @@ public class ListSensorFragment extends ListFragment {
      * Starting a new activity in which fragment is displayed
      */
     void showDetails(int index) {
+        // TODO Implement sensors details
         // Launch a new activity to display the dialog fragment with selected text.
-        Intent intent = new Intent();
+/*        Intent intent = new Intent();
         intent.setClass(getActivity(), DetailsSensorActivity.class);
         intent.putExtra("index", index);
-        startActivity(intent);
+        startActivity(intent);*/
     }
 
     // To get only sensor selected by user

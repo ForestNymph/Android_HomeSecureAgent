@@ -11,7 +11,7 @@ import java.util.ArrayList;
 /**
  * Created by s.grudowska on 23.07.2015
  */
-public class ConfigurationStateManager {
+public class ConfigurationStateStoreManager {
 
     public static void saveConfiguration(Context context, ArrayList<Integer> selectedCheckboxes) {
         SharedPreferences mPrefs = context.getSharedPreferences("selected_sensors", Context.MODE_PRIVATE);

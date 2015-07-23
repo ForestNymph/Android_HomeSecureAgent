@@ -1,35 +1,45 @@
 package pl.grudowska.pjwstk.homesecureagent;
 
+import android.util.Log;
+
+import org.apache.http.HttpResponse;
+import org.apache.http.client.HttpClient;
+import org.apache.http.client.methods.HttpGet;
+import org.apache.http.impl.client.DefaultHttpClient;
+
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
-import java.net.URL;
 
 /**
- * Created by s.grudowska on 11.07.2015
+ * Created by s.grudowska on 23.07.2015
  */
 public class DataDownloader {
 
-    public DataDownloader() {
-    }
+    public static String getData(String url) {
 
-    public String getData(URL url) {
+        InputStream inputStream = null;
+        String result = "";
 
-        InputStream inputStream = new ConnectionHandler().OpenConnection(url);
-        String tagResult = null;
+        try {
+            // Create HttpClient
+            HttpClient httpclient = new DefaultHttpClient();
+            // Make GET request to the given URL
+            HttpResponse httpResponse = httpclient.execute(new HttpGet(url));
+            // Receive response as inputStream
+            inputStream = httpResponse.getEntity().getContent();
 
-        if (inputStream != null) {
-            try {
-                tagResult = convertInputStreamToString(inputStream);
-                inputStream.close();
-            } catch (IOException e) {
-                e.printStackTrace();
+            // convert inputstream to string
+            if (inputStream != null) {
+                result = convertInputStreamToString(inputStream);
+            } else {
+                result = "Did not work!";
             }
-        } else {
-            tagResult = "Open connection did not work";
+        } catch (IOException e) {
+            Log.d("InputStream", e.getLocalizedMessage());
         }
-        return tagResult;
+        return result;
     }
 
     private static String convertInputStreamToString(InputStream inputStream) throws IOException {
@@ -39,6 +49,7 @@ public class DataDownloader {
         while ((line = bufferedReader.readLine()) != null) {
             result += line;
         }
+        inputStream.close();
         return result;
     }
 }

@@ -14,6 +14,9 @@ import java.util.ArrayList;
 
 public class SensorScreenActivity extends AppCompatActivity implements SensorDialog.OnCheckboxSelectedListener {
 
+    // private final String adress = "http://192.168.0.10:8080/sensors.json";
+    private final String adress = "http://192.168.0.10:8080/info";
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -22,6 +25,10 @@ public class SensorScreenActivity extends AppCompatActivity implements SensorDia
         ListSensorFragment listfragment = new ListSensorFragment();
         getSupportFragmentManager().beginTransaction().
                 add(R.id.list_content_fragment, listfragment, "list_fragment").commit();
+
+        //TODO add server IP
+        // Call AsyncTask to perform network operation in separate thread
+        new HttpAsyncTask(getApplicationContext()).execute(adress);
     }
 
     @Override
@@ -40,12 +47,14 @@ public class SensorScreenActivity extends AppCompatActivity implements SensorDia
                 DialogFragment about = new AboutDialog();
                 about.show(getSupportFragmentManager(), "");
                 return true;
-            case R.id.action_update:
+            // TODO Implement additional popup menu options
+            // TODO Uncoment xml menu
+/*            case R.id.action_update:
                 // Update option clicked.
                 return true;
             case R.id.action_notification:
                 // Notification option clicked.
-                return true;
+                return true;*/
             case R.id.action_sensors_dialog:
                 DialogFragment dialog = new SensorDialog();
                 dialog.show(getSupportFragmentManager(), "");

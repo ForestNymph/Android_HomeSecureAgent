@@ -1,10 +1,7 @@
 package pl.grudowska.pjwstk.homesecureagent;
 
-import java.net.MalformedURLException;
-import java.net.URL;
-
 /**
- * Created by s.grudowska on 11.07.2015.
+ * Created by s.grudowska on 11.07.2015
  */
 
 public class SensorDataParser {
@@ -19,19 +16,17 @@ public class SensorDataParser {
 
         String data = null;
         String sensorData = null;
-        try {
-            // TODO Parse latest element
-            data = new DataDownloader().getData(new URL("http://192.168.0.10:8080/info"));
-            int index = data.lastIndexOf("last_timestamp") + 3;
-            String lasttimestamp = data.substring(index, index + 10);
-            sensorData = "http://192.168.0.10:8080/getjson" + lasttimestamp;
-        } catch (MalformedURLException e) {
-            e.printStackTrace();
-        }
+
+        // TODO Parse latest element
+        data = new DataDownloader().getData("http://192.168.0.10:8080/info");
+        int index = data.lastIndexOf("last_timestamp") + 3;
+        String lasttimestamp = data.substring(index, index + 10);
+        sensorData = "http://192.168.0.10:8080/getjson" + lasttimestamp;
+
         return sensorData;
     }
 
-    public String resulSensorData() {
+    public String checkSensorResult() {
 
         // TODO Parse, check and set sensor data
         // range checking sensors

@@ -1,7 +1,7 @@
 package pl.grudowska.pjwstk.homesecureagent;
 
 /**
- * Created by s.grudowska on 12.07.2015.
+ * Created by s.grudowska on 12.07.2015
  */
 public class RangeOfSensor {
 

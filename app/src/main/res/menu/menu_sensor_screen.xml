@@ -9,17 +9,17 @@
         app:showAsAction="never" />
     <!--app:showAsAction="withText|ifRoom" />-->
 
-    <item
-        android:id="@+id/action_update"
-        android:orderInCategory="100"
-        android:title="@string/action_update"
-        app:showAsAction="never" />
+    <!--    <item
+            android:id="@+id/action_update"
+            android:orderInCategory="100"
+            android:title="@string/action_update"
+            app:showAsAction="never" />
 
-    <item
-        android:id="@+id/action_notification"
-        android:orderInCategory="100"
-        android:title="@string/acton_notification"
-        app:showAsAction="never" />
+        <item
+            android:id="@+id/action_notification"
+            android:orderInCategory="100"
+            android:title="@string/acton_notification"
+            app:showAsAction="never" />-->
 
     <item
         android:id="@+id/action_about"

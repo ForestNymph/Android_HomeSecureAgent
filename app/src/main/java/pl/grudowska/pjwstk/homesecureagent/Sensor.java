@@ -7,6 +7,26 @@ import java.util.ArrayList;
  */
 public class Sensor {
 
+    public enum SensorState {
+        DANGEROUS("Dengerous"),
+        WARNING("Warning"),
+        HIGH("High"),
+        NORMAL("Normal"),
+        LOW("Low"),
+        NONE("None");
+
+        private String stringSensor;
+
+        SensorState(String toString) {
+            stringSensor = toString;
+        }
+
+        @Override
+        public String toString() {
+            return stringSensor;
+        }
+    }
+
     public enum SensorType {
 
         TEMPERATURE("Temperature"),
@@ -80,13 +100,20 @@ public class Sensor {
     static ArrayList sensorDataCreator() {
         ArrayList<Sensor> sensorArray = new ArrayList();
 
-        Sensor temp = new Sensor("Temperature", "25℃", "Normal", R.drawable.icon_temperature);
-        Sensor humidity = new Sensor("Humidity", "78%", "High", R.drawable.icon_humidity);
-        Sensor gas = new Sensor("Gas", "---", "Warning", R.drawable.icon_gas);
-        Sensor smoke = new Sensor("Smoke", "---", "Warning", R.drawable.icon_smokefire);
-        Sensor carbon_monoxide = new Sensor("Carbon Monoxide", "---", "Warning", R.drawable.icon_co2);
-        Sensor distance = new Sensor("Distance", "---", "Warning", R.drawable.icon_distance);
-        Sensor motion = new Sensor("Motion", "---", "Warning", R.drawable.icon_motion);
+        Sensor temp = new Sensor(SensorType.TEMPERATURE.toString(), "---",
+                SensorState.NONE.toString(), R.drawable.icon_temperature);
+        Sensor humidity = new Sensor(SensorType.HUMIDITY.toString(), "---",
+                SensorState.NONE.toString(), R.drawable.icon_humidity);
+        Sensor gas = new Sensor(SensorType.GAS.toString(), "---",
+                SensorState.NONE.toString(), R.drawable.icon_gas);
+        Sensor smoke = new Sensor(SensorType.SMOKE.toString(), "---",
+                SensorState.NONE.toString(), R.drawable.icon_smokefire);
+        Sensor carbon_monoxide = new Sensor(SensorType.CARBON_MONOXIDE.toString(), "---",
+                SensorState.NONE.toString(), R.drawable.icon_co2);
+        Sensor distance = new Sensor(SensorType.DISTANCE.toString(), "---",
+                SensorState.NONE.toString(), R.drawable.icon_distance);
+        Sensor motion = new Sensor(SensorType.MOTION.toString(), "---",
+                SensorState.NONE.toString(), R.drawable.icon_motion);
 
         sensorArray.add(temp);
         sensorArray.add(humidity);

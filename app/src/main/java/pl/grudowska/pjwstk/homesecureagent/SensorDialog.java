@@ -48,7 +48,7 @@ public class SensorDialog extends android.support.v4.app.DialogFragment {
         builder.setTitle(R.string.sensors);
         // Specify the list array, the items to be selected by default (null for none),
         // and the listener through which to receive callbacks when items are selected
-        ArrayList<Integer> selectedSensors = ConfigurationStateManager.loadConfiguration(getActivity());
+        ArrayList<Integer> selectedSensors = ConfigurationStateStoreManager.loadConfiguration(getActivity());
         if (selectedSensors != null) {
 
         }
@@ -73,7 +73,7 @@ public class SensorDialog extends android.support.v4.app.DialogFragment {
                 // callingActivity.onUserSelectValues(mSelectedItems);
 
                 // Save configuration state
-                ConfigurationStateManager.saveConfiguration(getActivity(), mSelectedItems);
+                ConfigurationStateStoreManager.saveConfiguration(getActivity(), mSelectedItems);
                 mListener.onCheckboxSelected(mSelectedItems);
                 dialog.dismiss();
             }
