@@ -24,18 +24,17 @@ public class ListSensorFragment extends ListFragment {
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
 
-        if (savedInstanceState != null) {
-            // Restore last state for checked position.
-            mCurCheckPosition = savedInstanceState.getInt("curChoice", 0);
-        }
-        Bundle bundle = this.getArguments();
-        if (bundle == null) {
-            // Populate list with static array of sensor types
+        //Get indexes last saved list from SharedPreferences if exists
+        ArrayList<Integer> selectedSensors = ConfigurationStateManager.loadConfiguration(getActivity());
+        if (selectedSensors != null) {
+            ArrayList<Sensor> sensors = (ArrayList<Sensor>) parseSelectedSensors(selectedSensors);
+            setListAdapter(new SensorsAdapter(getActivity(), R.layout.sensor_list_row, sensors));
+        } else {/*
+            Bundle bundle = this.getArguments();
+            if (bundle == null) {*/
+            // Populate list with static array of all sensor types
             setListAdapter(new SensorsAdapter(getActivity(), R.layout.sensor_list_row, Sensor.sensorDataCreator()));
-        } else {
-            ArrayList<Integer> checkboxPositions = bundle.getIntegerArrayList("checkbox");
-            ArrayList<Sensor> sensor = (ArrayList<Sensor>) parseSelectedSensors(checkboxPositions);
-            setListAdapter(new SensorsAdapter(getActivity(), R.layout.sensor_list_row, sensor));
+//          }
         }
     }
 
@@ -43,17 +42,11 @@ public class ListSensorFragment extends ListFragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 /*        ListView lv = getListView();
         if(lv == null) {
-            Toast.makeText(getActivity(), "dupa", Toast.LENGTH_LONG).show();
+            Toast.makeText(getActivity(), "...", Toast.LENGTH_LONG).show();
         }*/
 
         // mSensorDataAdapter.notifyDataSetChanged();
         return super.onCreateView(inflater, container, savedInstanceState);
-    }
-
-    @Override
-    public void onSaveInstanceState(Bundle outState) {
-        super.onSaveInstanceState(outState);
-        outState.putInt("curChoice", mCurCheckPosition);
     }
 
     @Override
@@ -65,8 +58,6 @@ public class ListSensorFragment extends ListFragment {
      * Starting a new activity in which fragment is displayed
      */
     void showDetails(int index) {
-        mCurCheckPosition = index;
-
         // Launch a new activity to display the dialog fragment with selected text.
         Intent intent = new Intent();
         intent.setClass(getActivity(), DetailsSensorActivity.class);
@@ -74,15 +65,15 @@ public class ListSensorFragment extends ListFragment {
         startActivity(intent);
     }
 
-    // Method to get only sensor selected by user
+    // To get only sensor selected by user
     private List<Sensor> parseSelectedSensors(ArrayList index) {
 
         ArrayList<Sensor> sensor = Sensor.sensorDataCreator();
         ArrayList<Sensor> newSensorList = new ArrayList();
 
         for (int i = 0; i < index.size(); ++i) {
-            Sensor s = sensor.get(0);
-            newSensorList.add(sensor.get((int)index.get(i)));
+            int position = (int) index.get(i);
+            newSensorList.add(sensor.get(position));
         }
         return newSensorList;
     }

@@ -3,6 +3,6 @@
     android:id="@+id/list_content_fragment"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#fff"
+    android:background="#f2efe3"
     android:orientation="vertical" />
 

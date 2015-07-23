@@ -5,7 +5,6 @@ import android.app.Dialog;
 import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
-import android.widget.ArrayAdapter;
 
 import java.util.ArrayList;
 
@@ -19,8 +18,6 @@ import java.util.ArrayList;
 public class SensorDialog extends android.support.v4.app.DialogFragment {
 
     private ArrayList<Integer> mSelectedItems = null;
-    private String[] mSensorsList = null;
-    private ArrayAdapter<String> mItemsAdapter = null;
 
     // Interface object
     public OnCheckboxSelectedListener mListener;
@@ -51,6 +48,12 @@ public class SensorDialog extends android.support.v4.app.DialogFragment {
         builder.setTitle(R.string.sensors);
         // Specify the list array, the items to be selected by default (null for none),
         // and the listener through which to receive callbacks when items are selected
+        ArrayList<Integer> selectedSensors = ConfigurationStateManager.loadConfiguration(getActivity());
+        if (selectedSensors != null) {
+
+        }
+
+
         builder.setMultiChoiceItems(R.array.sensors_list, null, new DialogInterface.OnMultiChoiceClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which, boolean isChecked) {
@@ -69,6 +72,8 @@ public class SensorDialog extends android.support.v4.app.DialogFragment {
                 // SensorScreenActivity callingActivity = (SensorScreenActivity) getActivity();
                 // callingActivity.onUserSelectValues(mSelectedItems);
 
+                // Save configuration state
+                ConfigurationStateManager.saveConfiguration(getActivity(), mSelectedItems);
                 mListener.onCheckboxSelected(mSelectedItems);
                 dialog.dismiss();
             }
