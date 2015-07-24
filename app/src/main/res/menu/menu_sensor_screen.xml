@@ -3,6 +3,13 @@
     xmlns:tools="http://schemas.android.com/tools"
     tools:context=".SensorScreenActivity">
     <item
+        android:id="@+id/action_internet_state"
+        android:enabled="false"
+        android:icon="@drawable/unknown_state"
+        android:orderInCategory="100"
+        android:title="@string/action_internet_state"
+        app:showAsAction="ifRoom" />
+    <item
         android:id="@+id/action_sensors_dialog"
         android:orderInCategory="100"
         android:title="@string/action_sensors_dialog"

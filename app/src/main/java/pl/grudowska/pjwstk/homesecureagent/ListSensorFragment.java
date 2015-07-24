@@ -17,8 +17,6 @@ import java.util.List;
 //adapter.notifyDataSetChanged()
 public class ListSensorFragment extends ListFragment {
 
-    private int mCurCheckPosition = 0;
-
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
@@ -37,14 +35,20 @@ public class ListSensorFragment extends ListFragment {
         }
     }
 
+    public void updateList(ArrayList<Sensor> sensors) {
+        ArrayList<Sensor> test = Sensor.sensorDataCreator();
+        test.add(0, new Sensor(Sensor.SensorType.TEMPERATURE.toString(), "zupa z trupa",
+                Sensor.SensorState.NONE.toString(), R.drawable.icon_temperature));
+
+        setListAdapter(new SensorsAdapter(getActivity(), R.layout.sensor_list_row,
+                test));
+
+       //wtf this.notifyDataSetChanged();
+    }
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-/*        ListView lv = getListView();
-        if(lv == null) {
-            Toast.makeText(getActivity(), "...", Toast.LENGTH_LONG).show();
-        }*/
 
-        // mSensorDataAdapter.notifyDataSetChanged();
         return super.onCreateView(inflater, container, savedInstanceState);
     }
 

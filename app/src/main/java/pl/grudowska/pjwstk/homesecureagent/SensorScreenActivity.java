@@ -1,5 +1,9 @@
 package pl.grudowska.pjwstk.homesecureagent;
 
+import android.content.BroadcastReceiver;
+import android.content.Context;
+import android.content.Intent;
+import android.content.IntentFilter;
 import android.os.Bundle;
 import android.support.v4.app.DialogFragment;
 import android.support.v4.app.FragmentTransaction;
@@ -15,7 +19,16 @@ import java.util.ArrayList;
 public class SensorScreenActivity extends AppCompatActivity implements SensorDialog.OnCheckboxSelectedListener {
 
     // private final String adress = "http://192.168.0.10:8080/sensors.json";
-    private final String adress = "http://192.168.0.10:8080/info";
+    private final String mAdress = "http://192.168.0.10:8080/current_sensor";
+    private IntentFilter mIntent = new IntentFilter("android.net.conn.CONNECTIVITY_CHANGE");
+    // Broadcast receiver checking if internet connection exist and upadting MenuItem icon
+    private BroadcastReceiver mReceiver = new BroadcastReceiver() {
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            // Activity method upadting action bar
+            invalidateOptionsMenu();
+        }
+    };
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,7 +41,7 @@ public class SensorScreenActivity extends AppCompatActivity implements SensorDia
 
         //TODO add server IP
         // Call AsyncTask to perform network operation in separate thread
-        new HttpAsyncTask(getApplicationContext()).execute(adress);
+        new HttpAsyncTask(getApplicationContext()).execute(mAdress);
     }
 
     @Override
@@ -36,7 +49,19 @@ public class SensorScreenActivity extends AppCompatActivity implements SensorDia
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.menu_sensor_screen, menu);
         restoreActionBar();
+
         return true;
+    }
+
+    @Override
+    public boolean onPrepareOptionsMenu(Menu menu) {
+        MenuItem internetIcon = menu.findItem(R.id.action_internet_state);
+        if (ConnectionManager.isConnect(this)) {
+            internetIcon.setIcon(getResources().getDrawable(R.drawable.connected_state));
+        } else {
+            internetIcon.setIcon(getResources().getDrawable(R.drawable.unknown_state));
+        }
+        return super.onPrepareOptionsMenu(menu);
     }
 
     @Override
@@ -99,7 +124,20 @@ public class SensorScreenActivity extends AppCompatActivity implements SensorDia
         // getSupportActionBar().setDisplayShowHomeEnabled(true);
         getSupportActionBar().setIcon(R.mipmap.icon_orange);
     }
-/*
+
+    @Override
+    protected void onStart() {
+        registerReceiver(mReceiver, mIntent);
+        super.onStart();
+    }
+
+    @Override
+    protected void onStop() {
+        unregisterReceiver(mReceiver);
+        super.onStop();
+    }
+
+    /*
     Callback method from SensorDialog (fragment), returning the value of user
     input. Replaced by the recommended Interface to talk back to the activity.
     @param selectedValues value returned from SensorDialog. array of selected checkboxes.

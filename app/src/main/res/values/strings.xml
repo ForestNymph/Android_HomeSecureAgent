@@ -2,6 +2,7 @@
     <string name="app_name">Home Secure Agent</string>
     <string name="action_about">About</string>
     <string name="action_sensors_dialog">Sensors</string>
+    <string name="action_internet_state">Internet connection</string>
     <string name="action_update">Refresh rate</string>
     <string name="acton_notification">Notifications</string>
     <string name="apply_dialog">Apply</string>
