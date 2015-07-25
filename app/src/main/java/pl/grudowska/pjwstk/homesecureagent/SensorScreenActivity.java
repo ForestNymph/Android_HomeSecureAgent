@@ -15,17 +15,15 @@ import android.view.MenuItem;
 import java.util.ArrayList;
 
 //http://simpledeveloper.com/how-to-communicate-between-fragments-and-activities/
-
 public class SensorScreenActivity extends AppCompatActivity implements SensorDialog.OnCheckboxSelectedListener {
 
-    // private final String adress = "http://192.168.0.10:8080/sensors.json";
-    private final String mAdress = "http://192.168.0.10:8080/current_sensor";
+    private final String mAdress = "http://grudowska.pl:8080/current_sensor";
     private IntentFilter mIntent = new IntentFilter("android.net.conn.CONNECTIVITY_CHANGE");
-    // Broadcast receiver checking if internet connection exist and upadting MenuItem icon
+    // Broadcast receiver checking if internet connection exist and upadting MenuItem internet icon
     private BroadcastReceiver mReceiver = new BroadcastReceiver() {
         @Override
         public void onReceive(Context context, Intent intent) {
-            // Activity method upadting action bar
+            // Activity method updating action bar
             invalidateOptionsMenu();
         }
     };
@@ -39,9 +37,8 @@ public class SensorScreenActivity extends AppCompatActivity implements SensorDia
         getSupportFragmentManager().beginTransaction().
                 add(R.id.list_content_fragment, listfragment, "list_fragment").commit();
 
-        //TODO add server IP
         // Call AsyncTask to perform network operation in separate thread
-        new HttpAsyncTask(getApplicationContext()).execute(mAdress);
+        new HttpAsyncTask(this).execute(mAdress);
     }
 
     @Override
@@ -73,7 +70,7 @@ public class SensorScreenActivity extends AppCompatActivity implements SensorDia
                 about.show(getSupportFragmentManager(), "");
                 return true;
             // TODO Implement additional popup menu options
-            // TODO Uncoment xml menu
+            // TODO Uncomment xml menu
 /*            case R.id.action_update:
                 // Update option clicked.
                 return true;
@@ -112,8 +109,6 @@ public class SensorScreenActivity extends AppCompatActivity implements SensorDia
         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
         // Replace whatever is in the fragment_container view with this fragment
         transaction.replace(R.id.list_content_fragment, fragment);
-
-        // Commit the transaction
         transaction.commit();
     }
 

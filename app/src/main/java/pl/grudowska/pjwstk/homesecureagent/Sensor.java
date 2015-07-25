@@ -33,7 +33,7 @@ public class Sensor {
         HUMIDITY("Humidity"),
         GAS("Gas"),
         SMOKE("Smoke"),
-        CARBON_MONOXIDE("Carbon Monoxide"),
+        CARBON_MONOXIDE("CarbonMonoxide"),
         DISTANCE("Distance"),
         MOTION("Motion");
 
@@ -49,55 +49,44 @@ public class Sensor {
         }
     }
 
-    private String nameSensor;
-    private String valueSensor;
-    private String statusSensor;
-    private int imageSensor;
+    private String mNameSensor;
+    private String mValueSensor;
+    private String mStatusSensor;
+    private int mImageSensor;
 
     public Sensor(String name, String value, String status, int image) {
-        this.nameSensor = name;
-        this.valueSensor = value;
-        this.statusSensor = status;
-        this.imageSensor = image;
-    }
-
-    public void setNameSensor(String nameSensor) {
-
-        this.nameSensor = nameSensor;
+        this.mNameSensor = name;
+        this.mValueSensor = value;
+        this.mStatusSensor = status;
+        this.mImageSensor = image;
     }
 
     public void setValueSensor(String valueSensor) {
-
-        this.valueSensor = valueSensor;
-    }
-
-    public void setImageSensor(int imageSensor) {
-
-        this.imageSensor = imageSensor;
+        mValueSensor = valueSensor;
     }
 
     public void setStatusSensor(String status) {
-
-        this.statusSensor = status;
+        mStatusSensor = status;
     }
 
     public String getNameSensor() {
-        return nameSensor;
+        return mNameSensor;
     }
 
     public String getValueSensor() {
-        return valueSensor;
+        return mValueSensor;
     }
 
     public String getStatusSensor() {
-        return statusSensor;
+        return mStatusSensor;
     }
 
     public int getImageSensor() {
-        return imageSensor;
+        return mImageSensor;
     }
 
-    static ArrayList sensorDataCreator() {
+    // Return list with all existing sensors
+    public static ArrayList<Sensor> initializeSensorDataCreator() {
         ArrayList<Sensor> sensorArray = new ArrayList();
 
         Sensor temp = new Sensor(SensorType.TEMPERATURE.toString(), "---",
@@ -124,5 +113,25 @@ public class Sensor {
         sensorArray.add(motion);
 
         return sensorArray;
+    }
+
+    // Return list with sensors selected by user only
+    public static ArrayList<Sensor> selectedSensorDataCreator(ArrayList<Integer> index) {
+
+        ArrayList<Sensor> sensor = Sensor.initializeSensorDataCreator();
+        ArrayList<Sensor> newSensorList = new ArrayList<>();
+        int position;
+
+        for (int i = 0; i < index.size(); ++i) {
+            position = index.get(i);
+            newSensorList.add(sensor.get(position));
+        }
+        return newSensorList;
+    }
+
+    // Return list with sensors selected by user after update values
+    public static ArrayList<Sensor> updateSelectedSensorDataCreator(ArrayList<Integer> values) {
+        ArrayList<Sensor> updateValues = null;
+        return updateValues;
     }
 }

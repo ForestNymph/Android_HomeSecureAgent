@@ -50,10 +50,8 @@ public class SensorDialog extends android.support.v4.app.DialogFragment {
         // and the listener through which to receive callbacks when items are selected
         ArrayList<Integer> selectedSensors = ConfigurationStateStoreManager.loadConfiguration(getActivity());
         if (selectedSensors != null) {
-
+            //TODO view selected checkbox
         }
-
-
         builder.setMultiChoiceItems(R.array.sensors_list, null, new DialogInterface.OnMultiChoiceClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which, boolean isChecked) {
@@ -85,9 +83,6 @@ public class SensorDialog extends android.support.v4.app.DialogFragment {
                 // Do nothing
             }
         });
-        // builder.setIcon(R.drawable.icon_inside_app);
-        // builder.setView(configureDialogView());
-
         // Create the AlertDialog object and return it
         return builder.create();
     }

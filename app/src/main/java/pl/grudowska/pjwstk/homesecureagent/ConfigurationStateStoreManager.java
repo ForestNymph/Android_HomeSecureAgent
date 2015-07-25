@@ -33,4 +33,13 @@ public class ConfigurationStateStoreManager {
 
         return checkbox;
     }
+
+    public static boolean isStored(Context context, String key) {
+        SharedPreferences mPrefs = context.getSharedPreferences(key, Context.MODE_PRIVATE);
+        if (mPrefs.contains(key)) {
+            return true;
+        } else {
+            return false;
+        }
+    }
 }
