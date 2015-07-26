@@ -13,25 +13,38 @@ import java.util.ArrayList;
  */
 public class ConfigurationStateStoreManager {
 
-    public static void saveConfiguration(Context context, ArrayList<Integer> selectedCheckboxes) {
-        SharedPreferences mPrefs = context.getSharedPreferences("selected_sensors", Context.MODE_PRIVATE);
+    public static void saveSensorObjectsIndexArray(Context context, ArrayList<Integer> sensor) {
+        SharedPreferences mPrefs = context.getSharedPreferences("objects_sensor", Context.MODE_PRIVATE);
         SharedPreferences.Editor prefsEditor = mPrefs.edit();
         Gson gson = new Gson();
-        String json = gson.toJson(selectedCheckboxes);
-        prefsEditor.putString("selected_sensors", json);
+
+        // Create object from list indexes
+        ArrayList<Sensor> sensorObject = Sensor.selectedSensorDataCreator(sensor);
+
+        String json = gson.toJson(sensorObject);
+        prefsEditor.putString("objects_sensor", json);
         prefsEditor.apply();
     }
 
-    public static ArrayList<Integer> loadConfiguration(Context context) {
-        SharedPreferences mPrefs = context.getSharedPreferences("selected_sensors", Context.MODE_PRIVATE);
+    public static void saveSensorObjectsSensorArray(Context context, ArrayList<Sensor> sensor) {
+        SharedPreferences mPrefs = context.getSharedPreferences("objects_sensor", Context.MODE_PRIVATE);
+        SharedPreferences.Editor prefsEditor = mPrefs.edit();
         Gson gson = new Gson();
-        String json = mPrefs.getString("selected_sensors", "");
+        String json = gson.toJson(sensor);
+        prefsEditor.putString("objects_sensor", json);
+        prefsEditor.apply();
+    }
 
-        // new TypeToken (...) return Integer Array
-        ArrayList<Integer> checkbox = gson.fromJson(json, new TypeToken<ArrayList<Integer>>() {
+    public static ArrayList<Sensor> loadSensorObjects(Context context) {
+        SharedPreferences mPrefs = context.getSharedPreferences("objects_sensor", Context.MODE_PRIVATE);
+        Gson gson = new Gson();
+        String json = mPrefs.getString("objects_sensor", "");
+
+        // new TypeToken (...) return Sensor Array
+        ArrayList<Sensor> sensors = gson.fromJson(json, new TypeToken<ArrayList<Sensor>>() {
         }.getType());
 
-        return checkbox;
+        return sensors;
     }
 
     public static boolean isStored(Context context, String key) {

@@ -31,7 +31,7 @@ public class SensorDialog extends android.support.v4.app.DialogFragment {
     public Dialog onCreateDialog(Bundle savedInstanceState) {
 
         // Array with selected items
-        mSelectedItems = new ArrayList();
+        mSelectedItems = new ArrayList<>();
 
         // Use the Builder class for convenient dialog construction
         // 1. Instantiate an AlertDialog.Builder with its constructor
@@ -48,10 +48,11 @@ public class SensorDialog extends android.support.v4.app.DialogFragment {
         builder.setTitle(R.string.sensors);
         // Specify the list array, the items to be selected by default (null for none),
         // and the listener through which to receive callbacks when items are selected
-        ArrayList<Integer> selectedSensors = ConfigurationStateStoreManager.loadConfiguration(getActivity());
-        if (selectedSensors != null) {
-            //TODO view selected checkbox
-        }
+
+        // ArrayList<Integer> selectedSensors = ConfigurationStateStoreManager.loadConfiguration(getActivity());
+        // if (selectedSensors != null) {
+        //TODO view selected checkbox
+        // }
         builder.setMultiChoiceItems(R.array.sensors_list, null, new DialogInterface.OnMultiChoiceClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which, boolean isChecked) {
@@ -71,7 +72,7 @@ public class SensorDialog extends android.support.v4.app.DialogFragment {
                 // callingActivity.onUserSelectValues(mSelectedItems);
 
                 // Save configuration state
-                ConfigurationStateStoreManager.saveConfiguration(getActivity(), mSelectedItems);
+                ConfigurationStateStoreManager.saveSensorObjectsIndexArray(getActivity(), mSelectedItems);
                 mListener.onCheckboxSelected(mSelectedItems);
                 dialog.dismiss();
             }

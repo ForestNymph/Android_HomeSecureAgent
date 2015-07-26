@@ -20,12 +20,11 @@ public class ListSensorFragment extends ListFragment {
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
 
-        if (ConfigurationStateStoreManager.isStored(getActivity(), "selected_sensors")) {
-            //Get indexes of last saved list from SharedPreferences if exists
-            ArrayList<Integer> selectedSensors = ConfigurationStateStoreManager.loadConfiguration(getActivity());
+        if (ConfigurationStateStoreManager.isStored(getActivity(), "objects_sensor")) {
+            //Get indexes of last saved list if exists
+            ArrayList<Sensor> selectedSensors = ConfigurationStateStoreManager.loadSensorObjects(getActivity());
             if (selectedSensors != null) {
-                ArrayList<Sensor> sensors = (ArrayList<Sensor>) Sensor.selectedSensorDataCreator(selectedSensors);
-                setListAdapter(new SensorsAdapter(getActivity(), R.layout.sensor_list_row, sensors));
+                setListAdapter(new SensorsAdapter(getActivity(), R.layout.sensor_list_row, selectedSensors));
             }
         } else {
             // Bundle bundle = this.getArguments(); if (bundle == null) {
@@ -37,6 +36,7 @@ public class ListSensorFragment extends ListFragment {
     }
 
     public void updateList(ArrayList<Sensor> sensors) {
+        ConfigurationStateStoreManager.saveSensorObjectsSensorArray(getActivity(), sensors);
         setListAdapter(new SensorsAdapter(getActivity(), R.layout.sensor_list_row,
                 sensors));
     }

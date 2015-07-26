@@ -53,63 +53,60 @@ public class JSONParser {
                             findFragmentByTag("list_fragment");
 
                     if (fragment != null) {
-                        //Get indexes of last saved list from SharedPreferences if exists
-                        ArrayList<Integer> selectedSensors = ConfigurationStateStoreManager.
-                                loadConfiguration(mContext);
+                        // Get latest saved sensors list objects and update
+                        ArrayList<Sensor> selectedSensors = ConfigurationStateStoreManager.
+                                loadSensorObjects(mContext);
                         if (selectedSensors != null) {
-                            // List of current selected sensor
-                            ArrayList<Sensor> updateSensor = Sensor.selectedSensorDataCreator(selectedSensors);
-
-                            for (int i = 0; i < updateSensor.size(); ++i) {
-                                String check = updateSensor.get(i).getNameSensor().toLowerCase();
+                            for (int i = 0; i < selectedSensors.size(); ++i) {
+                                String check = selectedSensors.get(i).getNameSensor().toLowerCase();
 
                                 switch (check) {
                                     case "timestamp": {
                                         Date date = new Date(timestamp);
                                         DateFormat formatter = new SimpleDateFormat("d MMM, HH:mm:ss", Locale.getDefault());
-                                        updateSensor.get(i).setValueSensor(formatter.format(date));
+                                        selectedSensors.get(i).setValueSensor(formatter.format(date));
                                         break;
                                     }
                                     case "temperature": {
-                                        updateSensor.get(i).setValueSensor(Integer.toString(temp) + "\u2103");
-                                        updateSensor.get(i).setStatusSensor(StatusParser.parseValue(check, temp));
+                                        selectedSensors.get(i).setValueSensor(Integer.toString(temp) + "\u2103");
+                                        selectedSensors.get(i).setStatusSensor(StatusParser.parseValue(check, temp));
                                         break;
                                     }
                                     case "humidity": {
-                                        updateSensor.get(i).setValueSensor(Integer.toString(humidity) + "%");
-                                        updateSensor.get(i).setStatusSensor(StatusParser.parseValue(check, humidity));
+                                        selectedSensors.get(i).setValueSensor(Integer.toString(humidity) + "%");
+                                        selectedSensors.get(i).setStatusSensor(StatusParser.parseValue(check, humidity));
                                         break;
                                     }
                                     case "gas": {
-                                        updateSensor.get(i).setValueSensor(Integer.toString(0) + " unit");
-                                        updateSensor.get(i).setStatusSensor(StatusParser.parseValue(check, 0));
+                                        selectedSensors.get(i).setValueSensor(Integer.toString(0) + " unit");
+                                        selectedSensors.get(i).setStatusSensor(StatusParser.parseValue(check, 0));
                                         break;
                                     }
                                     case "smoke": {
-                                        updateSensor.get(i).setValueSensor(Integer.toString(0) + " unit");
-                                        updateSensor.get(i).setStatusSensor(StatusParser.parseValue(check, 0));
+                                        selectedSensors.get(i).setValueSensor(Integer.toString(0) + " unit");
+                                        selectedSensors.get(i).setStatusSensor(StatusParser.parseValue(check, 0));
                                         break;
                                     }
                                     case "carbonmonoxide": {
-                                        updateSensor.get(i).setValueSensor(Integer.toString(0) + " unit");
-                                        updateSensor.get(i).setStatusSensor(StatusParser.parseValue(check, 0));
+                                        selectedSensors.get(i).setValueSensor(Integer.toString(0) + " unit");
+                                        selectedSensors.get(i).setStatusSensor(StatusParser.parseValue(check, 0));
                                         break;
                                     }
                                     case "motion": {
-                                        updateSensor.get(i).setValueSensor(Integer.toString(0) + " unit");
-                                        updateSensor.get(i).setStatusSensor(StatusParser.parseValue(check, 0));
+                                        selectedSensors.get(i).setValueSensor(Integer.toString(0) + " unit");
+                                        selectedSensors.get(i).setStatusSensor(StatusParser.parseValue(check, 0));
                                         break;
                                     }
                                     case "distance": {
-                                        updateSensor.get(i).setValueSensor(Integer.toString(0) + "unit");
-                                        updateSensor.get(i).setStatusSensor(StatusParser.parseValue(check, 0));
+                                        selectedSensors.get(i).setValueSensor(Integer.toString(0) + " unit");
+                                        selectedSensors.get(i).setStatusSensor(StatusParser.parseValue(check, 0));
                                         break;
                                     }
                                     default:
                                         break;
                                 }
                             }
-                            fragment.updateList(updateSensor);
+                            fragment.updateList(selectedSensors);
                         }
                     }
                 }
