@@ -7,7 +7,11 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.sql.Date;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Locale;
 
 /**
  * Created by s.grudowska on 24.07.2015
@@ -28,7 +32,7 @@ public class JSONParser {
                 JSONObject json = new JSONObject(mResponse);
 
                 JSONArray sensors = json.getJSONArray("sensorList");
-
+                Long timestamp = sensors.getJSONObject(0).getLong("timestamp");
                 Integer temp = sensors.getJSONObject(0).getInt("temperature");
                 Integer humidity = sensors.getJSONObject(0).getInt("humidity");
 
@@ -49,15 +53,6 @@ public class JSONParser {
                             findFragmentByTag("list_fragment");
 
                     if (fragment != null) {
-
-              /*          ArrayList<Sensor> test = Sensor.initializeSensorDataCreator();
-                        test.remove(0);
-                        test.add(0, new Sensor(Sensor.SensorType.TEMPERATURE.toString(), Integer.toString(temp) + " \u00b0C",
-                                Sensor.SensorState.NONE.toString(), R.drawable.icon_temperature));
-                        test.remove(1);
-                        test.add(1, new Sensor(Sensor.SensorType.HUMIDITY.toString(), Integer.toString(humidity) + " %",
-                                Sensor.SensorState.NONE.toString(), R.drawable.icon_humidity));*/
-
                         //Get indexes of last saved list from SharedPreferences if exists
                         ArrayList<Integer> selectedSensors = ConfigurationStateStoreManager.
                                 loadConfiguration(mContext);
@@ -69,34 +64,49 @@ public class JSONParser {
                                 String check = updateSensor.get(i).getNameSensor().toLowerCase();
 
                                 switch (check) {
+                                    case "timestamp": {
+                                        Date date = new Date(timestamp);
+                                        DateFormat formatter = new SimpleDateFormat("d MMM, HH:mm:ss", Locale.getDefault());
+                                        updateSensor.get(i).setValueSensor(formatter.format(date));
+                                        break;
+                                    }
                                     case "temperature": {
                                         updateSensor.get(i).setValueSensor(Integer.toString(temp) + "\u2103");
+                                        updateSensor.get(i).setStatusSensor(StatusParser.parseValue(check, temp));
                                         break;
                                     }
                                     case "humidity": {
                                         updateSensor.get(i).setValueSensor(Integer.toString(humidity) + "%");
+                                        updateSensor.get(i).setStatusSensor(StatusParser.parseValue(check, humidity));
                                         break;
                                     }
                                     case "gas": {
-                                        updateSensor.get(i).setValueSensor(Integer.toString(temp));
+                                        updateSensor.get(i).setValueSensor(Integer.toString(0) + " unit");
+                                        updateSensor.get(i).setStatusSensor(StatusParser.parseValue(check, 0));
                                         break;
                                     }
                                     case "smoke": {
-                                        updateSensor.get(i).setValueSensor(Integer.toString(temp));
+                                        updateSensor.get(i).setValueSensor(Integer.toString(0) + " unit");
+                                        updateSensor.get(i).setStatusSensor(StatusParser.parseValue(check, 0));
                                         break;
                                     }
                                     case "carbonmonoxide": {
-                                        updateSensor.get(i).setValueSensor(Integer.toString(temp));
+                                        updateSensor.get(i).setValueSensor(Integer.toString(0) + " unit");
+                                        updateSensor.get(i).setStatusSensor(StatusParser.parseValue(check, 0));
                                         break;
                                     }
                                     case "motion": {
-                                        updateSensor.get(i).setValueSensor(Integer.toString(temp));
+                                        updateSensor.get(i).setValueSensor(Integer.toString(0) + " unit");
+                                        updateSensor.get(i).setStatusSensor(StatusParser.parseValue(check, 0));
                                         break;
                                     }
                                     case "distance": {
-                                        updateSensor.get(i).setValueSensor(Integer.toString(temp));
+                                        updateSensor.get(i).setValueSensor(Integer.toString(0) + "unit");
+                                        updateSensor.get(i).setStatusSensor(StatusParser.parseValue(check, 0));
                                         break;
                                     }
+                                    default:
+                                        break;
                                 }
                             }
                             fragment.updateList(updateSensor);

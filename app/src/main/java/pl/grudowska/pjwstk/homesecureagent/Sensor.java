@@ -29,6 +29,7 @@ public class Sensor {
 
     public enum SensorType {
 
+        TIMESTAMP("Timestamp"),
         TEMPERATURE("Temperature"),
         HUMIDITY("Humidity"),
         GAS("Gas"),
@@ -89,6 +90,8 @@ public class Sensor {
     public static ArrayList<Sensor> initializeSensorDataCreator() {
         ArrayList<Sensor> sensorArray = new ArrayList();
 
+        Sensor timestamp = new Sensor(SensorType.TIMESTAMP.toString(),
+                "---", "", R.drawable.update);
         Sensor temp = new Sensor(SensorType.TEMPERATURE.toString(), "---",
                 SensorState.NONE.toString(), R.drawable.icon_temperature);
         Sensor humidity = new Sensor(SensorType.HUMIDITY.toString(), "---",
@@ -104,6 +107,7 @@ public class Sensor {
         Sensor motion = new Sensor(SensorType.MOTION.toString(), "---",
                 SensorState.NONE.toString(), R.drawable.icon_motion);
 
+        sensorArray.add(timestamp);
         sensorArray.add(temp);
         sensorArray.add(humidity);
         sensorArray.add(gas);
@@ -122,16 +126,12 @@ public class Sensor {
         ArrayList<Sensor> newSensorList = new ArrayList<>();
         int position;
 
+        // Always add timestamp at index zero
+        newSensorList.add(sensor.get(0));
         for (int i = 0; i < index.size(); ++i) {
-            position = index.get(i);
+            position = index.get(i) + 1;
             newSensorList.add(sensor.get(position));
         }
         return newSensorList;
-    }
-
-    // Return list with sensors selected by user after update values
-    public static ArrayList<Sensor> updateSelectedSensorDataCreator(ArrayList<Integer> values) {
-        ArrayList<Sensor> updateValues = null;
-        return updateValues;
     }
 }
