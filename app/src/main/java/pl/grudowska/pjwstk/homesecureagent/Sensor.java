@@ -34,7 +34,7 @@ public class Sensor {
         HUMIDITY("Humidity"),
         GAS("Gas"),
         SMOKE("Smoke"),
-        CARBON_MONOXIDE("CarbonMonoxide"),
+        CARBON_MONOXIDE("Carbon Monoxide"),
         DISTANCE("Distance"),
         MOTION("Motion");
 

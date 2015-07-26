@@ -40,12 +40,12 @@ public class JSONParser {
                 TODO support sensor below
                 Integer gas = sensors.getJSONObject(0).getInt("gas");
                 Integer smoke = sensors.getJSONObject(0).getInt("smoke");
-                Integer carbonMonoxide = sensors.getJSONObject(0).getInt("carbon_monoxide");
+                Integer carbonMonoxide = sensors.getJSONObject(0).getInt("carbon monoxide");
                 Integer distance = sensors.getJSONObject(0).getInt("distance");
                 Integer motion = sensors.getJSONObject(0).getInt("motion");
                 */
 
-                // If app still working - update list from thread
+                // If app still working - update UI list from thread
                 if (mContext != null) {
 
                     SensorScreenActivity activity = (SensorScreenActivity) mContext;
@@ -53,9 +53,14 @@ public class JSONParser {
                             findFragmentByTag("list_fragment");
 
                     if (fragment != null) {
-                        // Get latest saved sensors list objects and update
-                        ArrayList<Sensor> selectedSensors = ConfigurationStateStoreManager.
-                                loadSensorObjects(mContext);
+                        ArrayList<Sensor> selectedSensors = null;
+                        if(ConfigurationStateStoreManager.isStored(mContext, "objects_sensor")) {
+                            // Get latest saved sensors list objects and update
+                            selectedSensors = ConfigurationStateStoreManager.
+                                    loadSensorObjects(mContext);
+                        } else {
+                            selectedSensors = Sensor.initializeSensorDataCreator();
+                        }
                         if (selectedSensors != null) {
                             for (int i = 0; i < selectedSensors.size(); ++i) {
                                 String check = selectedSensors.get(i).getNameSensor().toLowerCase();
@@ -87,7 +92,7 @@ public class JSONParser {
                                         selectedSensors.get(i).setStatusSensor(StatusParser.parseValue(check, 0));
                                         break;
                                     }
-                                    case "carbonmonoxide": {
+                                    case "carbon monoxide": {
                                         selectedSensors.get(i).setValueSensor(Integer.toString(0) + " unit");
                                         selectedSensors.get(i).setStatusSensor(StatusParser.parseValue(check, 0));
                                         break;

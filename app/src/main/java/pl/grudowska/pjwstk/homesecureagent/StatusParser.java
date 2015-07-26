@@ -40,7 +40,7 @@ public class StatusParser {
                 status = Sensor.SensorState.NONE.toString();
                 break;
             }
-            case "carbonmonoxide": {
+            case "carbon monoxide": {
                 status = Sensor.SensorState.NONE.toString();
                 break;
             }
