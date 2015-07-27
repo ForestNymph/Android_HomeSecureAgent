@@ -53,7 +53,7 @@ public class StatusParser {
                 break;
             }
             default:
-                status = "---";
+                status = Sensor.SensorState.NONE.toString();
                 break;
         }
         return status;

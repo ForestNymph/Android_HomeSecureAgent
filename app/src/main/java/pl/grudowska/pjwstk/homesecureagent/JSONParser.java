@@ -35,15 +35,11 @@ public class JSONParser {
                 Long timestamp = sensors.getJSONObject(0).getLong("timestamp");
                 Integer temp = sensors.getJSONObject(0).getInt("temperature");
                 Integer humidity = sensors.getJSONObject(0).getInt("humidity");
-
-                /*
-                TODO support sensor below
                 Integer gas = sensors.getJSONObject(0).getInt("gas");
                 Integer smoke = sensors.getJSONObject(0).getInt("smoke");
                 Integer carbonMonoxide = sensors.getJSONObject(0).getInt("carbon monoxide");
                 Integer distance = sensors.getJSONObject(0).getInt("distance");
                 Integer motion = sensors.getJSONObject(0).getInt("motion");
-                */
 
                 // If app still working - update UI list from thread
                 if (mContext != null) {
@@ -83,27 +79,27 @@ public class JSONParser {
                                         break;
                                     }
                                     case "gas": {
-                                        selectedSensors.get(i).setValueSensor(Integer.toString(0) + " unit");
+                                        selectedSensors.get(i).setValueSensor(Integer.toString(gas) + " unit");
                                         selectedSensors.get(i).setStatusSensor(StatusParser.parseValue(check, 0));
                                         break;
                                     }
                                     case "smoke": {
-                                        selectedSensors.get(i).setValueSensor(Integer.toString(0) + " unit");
+                                        selectedSensors.get(i).setValueSensor(Integer.toString(smoke) + " unit");
                                         selectedSensors.get(i).setStatusSensor(StatusParser.parseValue(check, 0));
                                         break;
                                     }
                                     case "carbon monoxide": {
-                                        selectedSensors.get(i).setValueSensor(Integer.toString(0) + " unit");
+                                        selectedSensors.get(i).setValueSensor(Integer.toString(carbonMonoxide) + " unit");
                                         selectedSensors.get(i).setStatusSensor(StatusParser.parseValue(check, 0));
                                         break;
                                     }
                                     case "motion": {
-                                        selectedSensors.get(i).setValueSensor(Integer.toString(0) + " unit");
+                                        selectedSensors.get(i).setValueSensor(Integer.toString(motion) + " unit");
                                         selectedSensors.get(i).setStatusSensor(StatusParser.parseValue(check, 0));
                                         break;
                                     }
                                     case "distance": {
-                                        selectedSensors.get(i).setValueSensor(Integer.toString(0) + " unit");
+                                        selectedSensors.get(i).setValueSensor(Integer.toString(distance) + " unit");
                                         selectedSensors.get(i).setStatusSensor(StatusParser.parseValue(check, 0));
                                         break;
                                     }

@@ -3,8 +3,7 @@
     <string name="action_about">About</string>
     <string name="action_sensors_dialog">Sensors</string>
     <string name="action_internet_state">Internet connection</string>
-    <string name="action_update">Refresh rate</string>
-    <string name="acton_notification">Notifications</string>
+    <string name="action_update">Notifications / Refresh rate</string>
     <string name="apply_dialog">Apply</string>
     <string name="apply_about_dialog">Ok</string>
     <string name="cancel_dialog">Cancel</string>
@@ -19,10 +18,22 @@
         <item>Distance</item>
         <item>Motion</item>
     </string-array>
-    message_about
+    <string-array name="time_list">
+        <item>Turn off notification</item>
+        <item>5 seconds</item>
+        <item>10 seconds</item>
+        <item>30 seconds</item>
+        <item>1 minutes</item>
+        <item>5 minutes</item>
+        <item>10 minutes</item>
+        <item>30 minutes</item>
+        <item>1 hour</item>
+    </string-array>
     <string name="message_about">The application is an integral part of the Arduino platform
         with a system of connected sensors. It processes and presents the sensor data from
         the environment allowing for assessing its state and condition.\n\n\n
         Version: 1.0.0\n
         Author: Sylwia Grudowska</string>
+    <string name="message_notification">Set the refresh rate for information
+            about the sensors status</string>
 </resources>

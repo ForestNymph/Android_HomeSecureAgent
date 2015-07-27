@@ -5,6 +5,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.v4.app.DialogFragment;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.ActionBar;
@@ -13,10 +14,14 @@ import android.view.Menu;
 import android.view.MenuItem;
 
 import java.util.ArrayList;
+import java.util.Timer;
+import java.util.TimerTask;
 
 //http://simpledeveloper.com/how-to-communicate-between-fragments-and-activities/
 public class SensorScreenActivity extends AppCompatActivity implements SensorDialog.OnCheckboxSelectedListener {
 
+    private Timer timer = null;
+    private Context context = this;
     private final String mAdress = "http://grudowska.pl:8080/current_sensor";
     private IntentFilter mIntent = new IntentFilter("android.net.conn.CONNECTIVITY_CHANGE");
     // Broadcast receiver checking if internet connection exist and upadting MenuItem internet icon
@@ -38,7 +43,24 @@ public class SensorScreenActivity extends AppCompatActivity implements SensorDia
                 add(R.id.list_content_fragment, listfragment, "list_fragment").commit();
 
         // Call AsyncTask to perform network operation in separate thread
-        new HttpAsyncTask(this).execute(mAdress);
+        //callAsyncTask();
+    }
+
+    public void callAsyncTask() {
+        final Handler handler = new Handler();
+        timer = new Timer();
+        TimerTask task = new TimerTask() {
+
+            @Override
+            public void run() {
+                handler.post(new Runnable() {
+                    public void run() {
+                        new HttpAsyncTask(context).execute(mAdress);
+                    }
+                });
+            }
+        };
+        timer.schedule(task, 0, 3000);
     }
 
     @Override
@@ -65,21 +87,17 @@ public class SensorScreenActivity extends AppCompatActivity implements SensorDia
     public boolean onOptionsItemSelected(MenuItem item) {
         // Handle action bar item clicks here.
         switch (item.getItemId()) {
-            case R.id.action_about:
+            case R.id.action_about_dialog:
                 DialogFragment about = new AboutDialog();
                 about.show(getSupportFragmentManager(), "");
                 return true;
-            // TODO Implement additional popup menu options
-            // TODO Uncomment xml menu
-/*            case R.id.action_update:
-                // Update option clicked.
+            case R.id.action_update_notification_dialog:
+                TimeNotificationDialog update = new TimeNotificationDialog();
+                update.show(getSupportFragmentManager(), "");
                 return true;
-            case R.id.action_notification:
-                // Notification option clicked.
-                return true;*/
             case R.id.action_sensors_dialog:
-                DialogFragment dialog = new SensorDialog();
-                dialog.show(getSupportFragmentManager(), "");
+                DialogFragment sensor = new SensorDialog();
+                sensor.show(getSupportFragmentManager(), "");
                 return true;
             default:
                 return super.onOptionsItemSelected(item);
@@ -122,12 +140,17 @@ public class SensorScreenActivity extends AppCompatActivity implements SensorDia
 
     @Override
     protected void onStart() {
+        callAsyncTask();
         registerReceiver(mReceiver, mIntent);
         super.onStart();
     }
 
     @Override
     protected void onStop() {
+        if (timer != null) {
+            timer.purge();
+            timer.cancel();
+        }
         unregisterReceiver(mReceiver);
         super.onStop();
     }
