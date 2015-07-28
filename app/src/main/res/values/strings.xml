@@ -5,7 +5,7 @@
     <string name="action_internet_state">Internet connection</string>
     <string name="action_update">Notifications / Refresh rate</string>
     <string name="apply_dialog">Apply</string>
-    <string name="apply_about_dialog">Ok</string>
+    <string name="apply_about_dialog">OK</string>
     <string name="cancel_dialog">Cancel</string>
     <string name="sensors">Sensors List</string>
     <string name="about">About</string>

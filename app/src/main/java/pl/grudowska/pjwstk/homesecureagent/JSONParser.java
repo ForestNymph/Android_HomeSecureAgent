@@ -26,6 +26,10 @@ public class JSONParser {
         mResponse = serverResponse;
     }
 
+    public JSONParser(String serverResponse) {
+        mResponse = serverResponse;
+    }
+
     public void start() {
         if (!mResponse.equals("")) {
             try {

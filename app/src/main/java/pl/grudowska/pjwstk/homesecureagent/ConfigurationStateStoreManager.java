@@ -47,6 +47,19 @@ public class ConfigurationStateStoreManager {
         return sensors;
     }
 
+    public static void saveIntegerValue(Context context, String key, int value) {
+        SharedPreferences mPrefs = context.getSharedPreferences(key, Context.MODE_PRIVATE);
+        SharedPreferences.Editor prefsEditor = mPrefs.edit();
+        prefsEditor.putInt(key, value);
+        prefsEditor.apply();
+    }
+
+    public static int loadIntegerValue(Context context, String key) {
+        SharedPreferences mPrefs = context.getSharedPreferences(key, Context.MODE_PRIVATE);
+        int value = mPrefs.getInt(key, 0);
+        return value;
+    }
+
     public static boolean isStored(Context context, String key) {
         SharedPreferences mPrefs = context.getSharedPreferences(key, Context.MODE_PRIVATE);
         if (mPrefs.contains(key)) {

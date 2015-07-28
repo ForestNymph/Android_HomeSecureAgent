@@ -55,9 +55,14 @@ public class ListSensorFragment extends ListFragment {
      * Starting a new activity in which fragment is displayed
      */
     void showDetails(int index) {
+        if (index == 0) {
+            new HttpAsyncTask(getActivity()).execute(SensorScreenActivity.adress());
+        }
+
+
         // TODO Implement sensors details
         // Launch a new activity to display the dialog fragment with selected text.
-/*        Intent intent = new Intent();
+/*      Intent intent = new Intent();
         intent.setClass(getActivity(), DetailsSensorActivity.class);
         intent.putExtra("index", index);
         startActivity(intent);*/

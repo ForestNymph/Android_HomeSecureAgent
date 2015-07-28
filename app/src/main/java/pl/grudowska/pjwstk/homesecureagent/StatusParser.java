@@ -28,7 +28,7 @@ public class StatusParser {
                 } else if (value > 40 && value < 70) {
                     status = Sensor.SensorState.NORMAL.toString();
                 } else {
-                    status = Sensor.SensorState.HIGH.toString();
+                    status = Sensor.SensorState.WARNING.toString();
                 }
                 break;
             }
