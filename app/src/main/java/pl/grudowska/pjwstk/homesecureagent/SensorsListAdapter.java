@@ -13,12 +13,12 @@ import java.util.ArrayList;
 /**
  * Created by s.grudowska on 18.07.2015
  */
-public class SensorsAdapter extends ArrayAdapter<Sensor> {
+public class SensorsListAdapter extends ArrayAdapter<Sensor> {
 
     private ArrayList<Sensor> mSensor;
 
     // row layout - textViewResourceId
-    public SensorsAdapter(Context context, int textViewResourceId, ArrayList<Sensor> sensors) {
+    public SensorsListAdapter(Context context, int textViewResourceId, ArrayList<Sensor> sensors) {
         super(context, textViewResourceId, sensors);
         mSensor = sensors;
     }

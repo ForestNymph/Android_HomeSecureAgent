@@ -11,7 +11,7 @@ import java.util.ArrayList;
 /**
  * Created by s.grudowska on 23.07.2015
  */
-public class ConfigurationStateStoreManager {
+public class DataStoreManager {
 
     public static void saveSensorObjectsIndexArray(Context context, ArrayList<Integer> sensor) {
         SharedPreferences mPrefs = context.getSharedPreferences("objects_sensor", Context.MODE_PRIVATE);

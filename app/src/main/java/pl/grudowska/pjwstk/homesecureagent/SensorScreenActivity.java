@@ -22,7 +22,7 @@ import java.util.TimerTask;
 
 //http://simpledeveloper.com/how-to-communicate-between-fragments-and-activities/
 public class SensorScreenActivity extends AppCompatActivity
-        implements SensorDialog.OnCheckboxSelectedListener, TimeNotificationDialog.OnRadiobuttonSelectedListener {
+        implements SensorListCheckboxDialog.OnCheckboxSelectedListener, TimeNotificationDialog.OnRadiobuttonSelectedListener {
 
     private Timer timer = null;
     private PendingIntent mPendingIntent;
@@ -45,30 +45,10 @@ public class SensorScreenActivity extends AppCompatActivity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sensor_screen);
 
+        // Set fragment with sensor list
         ListSensorFragment listfragment = new ListSensorFragment();
         getSupportFragmentManager().beginTransaction().
                 add(R.id.list_content_fragment, listfragment, "list_fragment").commit();
-
-        // Call AsyncTask to perform network operation in separate thread
-        // callAsyncTask();
-        new HttpAsyncTask(context).execute(adress());
-    }
-
-    public void callAsyncTask() {
-        final Handler handler = new Handler();
-        timer = new Timer();
-        TimerTask task = new TimerTask() {
-
-            @Override
-            public void run() {
-                handler.post(new Runnable() {
-                    public void run() {
-                        new HttpAsyncTask(context).execute(adress());
-                    }
-                });
-            }
-        };
-        timer.schedule(task, 0, 3000);
     }
 
     @Override
@@ -96,7 +76,7 @@ public class SensorScreenActivity extends AppCompatActivity
         // Handle action bar item clicks here.
         switch (item.getItemId()) {
             case R.id.action_about_dialog:
-                AboutDialog about = new AboutDialog();
+                AboutAppDialog about = new AboutAppDialog();
                 about.show(getSupportFragmentManager(), "");
                 return true;
             case R.id.action_update_notification_dialog:
@@ -104,7 +84,7 @@ public class SensorScreenActivity extends AppCompatActivity
                 update.show(getSupportFragmentManager(), "");
                 return true;
             case R.id.action_sensors_dialog:
-                SensorDialog sensor = new SensorDialog();
+                SensorListCheckboxDialog sensor = new SensorListCheckboxDialog();
                 sensor.show(getSupportFragmentManager(), "");
                 return true;
             default:
@@ -119,8 +99,8 @@ public class SensorScreenActivity extends AppCompatActivity
         mSecondsInterval = seconds;
     }
 
-    // Callback method to communicate between fragments (SensorDialog and ListSensorFragment)
-    // User change set of sensor in SensorDialog, then view in ListSensorFragment should refresh
+    // Callback method to communicate between fragments (SensorListCheckboxDialog and ListSensorFragment)
+    // User change set of sensor in SensorListCheckboxDialog, then view in ListSensorFragment should refresh
     @Override
     public void onCheckboxSelected(ArrayList<Integer> checkedbox) {
 
@@ -155,9 +135,6 @@ public class SensorScreenActivity extends AppCompatActivity
 
     @Override
     protected void onStart() {
-
-        //if(isMyServiceRunning(AlarmService.class)) {}
-
         // Stops alarm service when app is running
         stopAlarmService();
         registerReceiver(mReceiver, mIntent);
@@ -167,7 +144,7 @@ public class SensorScreenActivity extends AppCompatActivity
     @Override
     protected void onStop() {
         // When app is closing service is start to check values
-        int interval = ConfigurationStateStoreManager.loadIntegerValue(this, "notification_seconds");
+        int interval = DataStoreManager.loadIntegerValue(this, "notification_seconds");
         if (interval == 0) {
             stopAlarmService();
         } else {
@@ -182,11 +159,6 @@ public class SensorScreenActivity extends AppCompatActivity
 
             // Toast.makeText(SensorScreenActivity.this, "Start Alarm Service", Toast.LENGTH_SHORT).show();
         }
-/*
-        if (timer != null) {
-            timer.purge();
-            timer.cancel();
-        }*/
         unregisterReceiver(mReceiver);
         super.onStop();
     }
@@ -208,10 +180,6 @@ public class SensorScreenActivity extends AppCompatActivity
 
     @Override
     protected void onDestroy() {
-        if (timer != null) {
-            timer.purge();
-            timer.cancel();
-        }
         super.onDestroy();
     }
 
@@ -225,10 +193,27 @@ public class SensorScreenActivity extends AppCompatActivity
         }
         return false;
     }
+
+    public void callAsyncTask() {
+        final Handler handler = new Handler();
+        timer = new Timer();
+        TimerTask task = new TimerTask() {
+
+            @Override
+            public void run() {
+                handler.post(new Runnable() {
+                    public void run() {
+                        new HttpAsyncTask(context).execute(adress());
+                    }
+                });
+            }
+        };
+        timer.schedule(task, 0, 3000);
+    }
     /*
-    Callback method from SensorDialog (fragment), returning the value of user
+    Callback method from SensorListCheckboxDialog (fragment), returning the value of user
     input. Replaced by the recommended Interface to talk back to the activity.
-    @param selectedValues value returned from SensorDialog. array of selected checkboxes.
+    @param selectedValues value returned from SensorListCheckboxDialog. array of selected checkboxes.
 
     public void onUserSelectValues(ArrayList<Integer> selectedValues) {
         Toast.makeText(this, "index " + selectedValues.get(0).toString(), Toast.LENGTH_LONG).show();

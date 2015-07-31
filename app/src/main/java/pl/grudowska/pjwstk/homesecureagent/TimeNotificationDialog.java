@@ -24,8 +24,8 @@ public class TimeNotificationDialog extends android.support.v4.app.DialogFragmen
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
 
-        if (ConfigurationStateStoreManager.isStored(getActivity(), "notification_radiobutton")) {
-            mPosition = ConfigurationStateStoreManager.loadIntegerValue(getActivity(),
+        if (DataStoreManager.isStored(getActivity(), "notification_radiobutton")) {
+            mPosition = DataStoreManager.loadIntegerValue(getActivity(),
                     "notification_radiobutton");
         }
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity(), R.style.MyAlertDialogTheme);
@@ -41,10 +41,10 @@ public class TimeNotificationDialog extends android.support.v4.app.DialogFragmen
         builder.setPositiveButton(R.string.apply_about_dialog, new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int id) {
 
-                ConfigurationStateStoreManager.saveIntegerValue(getActivity(),
+                DataStoreManager.saveIntegerValue(getActivity(),
                         "notification_radiobutton", mPosition);
                 int secondsInterval = transformFromPositionToSeconds(mPosition);
-                ConfigurationStateStoreManager.saveIntegerValue(getActivity(),
+                DataStoreManager.saveIntegerValue(getActivity(),
                         "notification_seconds", secondsInterval);
 
                 // Listener to inform activity about change time interval

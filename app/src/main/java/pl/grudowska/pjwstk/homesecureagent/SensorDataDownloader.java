@@ -15,7 +15,7 @@ import java.io.InputStreamReader;
 /**
  * Created by s.grudowska on 23.07.2015
  */
-public class DataDownloader {
+public class SensorDataDownloader {
 
     public static String getData(String url) {
 

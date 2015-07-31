@@ -15,7 +15,7 @@ import java.util.ArrayList;
 // http://stackoverflow.com/questions/12622742/get-value-from-dialogfragment
 // http://stackoverflow.com/questions/10905312/receive-result-from-dialogfragment
 // http://developer.android.com/intl/zh-CN/guide/components/fragments.html#CommunicatingWithActivity
-public class SensorDialog extends android.support.v4.app.DialogFragment {
+public class SensorListCheckboxDialog extends android.support.v4.app.DialogFragment {
 
     private ArrayList<Integer> mSelectedItems = null;
 
@@ -49,7 +49,7 @@ public class SensorDialog extends android.support.v4.app.DialogFragment {
         // Specify the list array, the items to be selected by default (null for none),
         // and the listener through which to receive callbacks when items are selected
 
-        // ArrayList<Integer> selectedSensors = ConfigurationStateStoreManager.loadConfiguration(getActivity());
+        // ArrayList<Integer> selectedSensors = DataStoreManager.loadConfiguration(getActivity());
         // if (selectedSensors != null) {
         //TODO view selected checkbox
         // }
@@ -72,7 +72,7 @@ public class SensorDialog extends android.support.v4.app.DialogFragment {
                 // callingActivity.onUserSelectValues(mSelectedItems);
 
                 // Save configuration state
-                ConfigurationStateStoreManager.saveSensorObjectsIndexArray(getActivity(), mSelectedItems);
+                DataStoreManager.saveSensorObjectsIndexArray(getActivity(), mSelectedItems);
                 mListener.onCheckboxSelected(mSelectedItems);
                 dialog.dismiss();
             }

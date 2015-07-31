@@ -17,7 +17,7 @@ public class HttpAsyncTask extends AsyncTask<String, Void, String> {
 
     @Override
     protected String doInBackground(String... urls) {
-        return DataDownloader.getData(urls[0]);
+        return SensorDataDownloader.getData(urls[0]);
     }
 
     // onPostExecute displays the results of the AsyncTask.

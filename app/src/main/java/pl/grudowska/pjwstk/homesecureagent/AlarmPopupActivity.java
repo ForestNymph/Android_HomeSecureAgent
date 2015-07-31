@@ -11,7 +11,7 @@ import android.widget.TextView;
 /**
  * Created by s.grudowska on 28.07.2015
  */
-public class AlarmDialog extends Activity {
+public class AlarmPopupActivity extends Activity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -25,7 +25,7 @@ public class AlarmDialog extends Activity {
         TextView v = (TextView) this.findViewById(R.id.warning_text);
         v.setText("Watch out!\n" + sensor + " warning");
         ImageView image = (ImageView) this.findViewById(R.id.imageView);
-        image.setImageResource(R.drawable.icon_red);
+        image.setImageResource(R.drawable.icon_orange);
 
         Button okButton = (Button) findViewById(R.id.yes);
         okButton.setOnClickListener(new View.OnClickListener() {

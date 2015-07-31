@@ -31,7 +31,7 @@ public class AlarmService extends Service {
     }
 
     public void callbackValues(String warningSensor) {
-        Intent dialogIntent = new Intent(this, AlarmDialog.class);
+        Intent dialogIntent = new Intent(this, AlarmPopupActivity.class);
         dialogIntent.putExtra("warning", warningSensor);
         dialogIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         startActivity(dialogIntent);
@@ -54,7 +54,7 @@ public class AlarmService extends Service {
 
         @Override
         protected String doInBackground(String... params) {
-            return DataDownloader.getData(params[0]);
+            return SensorDataDownloader.getData(params[0]);
         }
 
         @Override
@@ -68,11 +68,11 @@ public class AlarmService extends Service {
                 json = new JSONObject(result);
                 JSONArray sensors = json.getJSONArray("sensorList");
                 Integer temp = sensors.getJSONObject(0).getInt("temperature");
-                if (StatusParser.parseValue("temperature", temp).equals("Warning")) {
+                if (SensorStatusParser.parseValue("temperature", temp).equals("Warning")) {
                     callbackValues("Temperature");
                 }
                 Integer humidity = sensors.getJSONObject(0).getInt("humidity");
-                if (StatusParser.parseValue("humidity", humidity).equals("Warning")) {
+                if (SensorStatusParser.parseValue("humidity", humidity).equals("Warning")) {
                     callbackValues("Humidity");
                 }
                 // TODO parse values by scope

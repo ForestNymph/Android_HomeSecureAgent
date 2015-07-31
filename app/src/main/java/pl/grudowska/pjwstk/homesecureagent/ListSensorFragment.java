@@ -20,29 +20,24 @@ public class ListSensorFragment extends ListFragment {
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
 
-        if (ConfigurationStateStoreManager.isStored(getActivity(), "objects_sensor")) {
+        if (DataStoreManager.isStored(getActivity(), "objects_sensor")) {
             //Get indexes of last saved list if exists
-            ArrayList<Sensor> selectedSensors = ConfigurationStateStoreManager.loadSensorObjects(getActivity());
+            ArrayList<Sensor> selectedSensors = DataStoreManager.loadSensorObjects(getActivity());
             if (selectedSensors != null) {
-                setListAdapter(new SensorsAdapter(getActivity(), R.layout.sensor_list_row, selectedSensors));
+                setListAdapter(new SensorsListAdapter(getActivity(), R.layout.sensor_list_row, selectedSensors));
             }
         } else {
             // Bundle bundle = this.getArguments(); if (bundle == null) {
 
             // Populate list with static array of all sensor types
-            setListAdapter(new SensorsAdapter(getActivity(),
+            setListAdapter(new SensorsListAdapter(getActivity(),
                     R.layout.sensor_list_row, Sensor.initializeSensorDataCreator()));
         }
     }
 
-    public void updateList(ArrayList<Sensor> sensors) {
-        ConfigurationStateStoreManager.saveSensorObjectsSensorArray(getActivity(), sensors);
-        setListAdapter(new SensorsAdapter(getActivity(), R.layout.sensor_list_row,
-                sensors));
-    }
-
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        updateListTask();
         return super.onCreateView(inflater, container, savedInstanceState);
     }
 
@@ -51,14 +46,24 @@ public class ListSensorFragment extends ListFragment {
         showDetails(position);
     }
 
+    public void updateListView(ArrayList<Sensor> sensors) {
+        DataStoreManager.saveSensorObjectsSensorArray(getActivity(), sensors);
+        setListAdapter(new SensorsListAdapter(getActivity(), R.layout.sensor_list_row,
+                sensors));
+    }
+
+    public void updateListTask() {
+        // Call AsyncTask to perform network operation in separate thread
+        new HttpAsyncTask(getActivity()).execute(SensorScreenActivity.adress());
+    }
+
     /**
      * Starting a new activity in which fragment is displayed
      */
     void showDetails(int index) {
         if (index == 0) {
-            new HttpAsyncTask(getActivity()).execute(SensorScreenActivity.adress());
+            updateListTask();
         }
-
 
         // TODO Implement sensors details
         // Launch a new activity to display the dialog fragment with selected text.

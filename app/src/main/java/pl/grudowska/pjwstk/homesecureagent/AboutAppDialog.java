@@ -8,7 +8,7 @@ import android.support.v7.app.AlertDialog;
 /**
  * Created by s.grudowska on 20.07.2015
  */
-public class AboutDialog extends android.support.v4.app.DialogFragment {
+public class AboutAppDialog extends android.support.v4.app.DialogFragment {
 
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {

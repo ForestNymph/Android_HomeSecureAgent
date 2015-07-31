@@ -3,7 +3,7 @@ package pl.grudowska.pjwstk.homesecureagent;
 /**
  * Created by s.grudowska on 26.07.2015
  */
-public class StatusParser {
+public class SensorStatusParser {
 
     public static String parseValue(String sensor, int value) {
         String status = null;

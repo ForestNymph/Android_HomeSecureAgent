@@ -32,7 +32,7 @@
             android:name=".DetailsSensorActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".AlarmDialog"
+            android:name=".AlarmPopupActivity"
             android:screenOrientation="portrait"
             android:theme="@style/MyAlertDialogTheme" />
 
