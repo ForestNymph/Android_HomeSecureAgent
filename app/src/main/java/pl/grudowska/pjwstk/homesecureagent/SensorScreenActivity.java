@@ -63,7 +63,7 @@ public class SensorScreenActivity extends AppCompatActivity
     @Override
     public boolean onPrepareOptionsMenu(Menu menu) {
         MenuItem internetIcon = menu.findItem(R.id.action_internet_state);
-        if (ConnectionManager.isConnect(this)) {
+        if (ConnectionController.isConnect(this)) {
             internetIcon.setIcon(getResources().getDrawable(R.drawable.connected_state));
         } else {
             internetIcon.setIcon(getResources().getDrawable(R.drawable.unknown_state));

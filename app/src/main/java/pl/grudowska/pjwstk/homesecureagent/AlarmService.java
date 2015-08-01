@@ -79,7 +79,7 @@ public class AlarmService extends Service {
                 Integer gas = sensors.getJSONObject(0).getInt("gas");
                 Integer smoke = sensors.getJSONObject(0).getInt("smoke");
                 Integer carbonMonoxide = sensors.getJSONObject(0).getInt("carbon monoxide");
-                Integer distance = sensors.getJSONObject(0).getInt("distance");
+                // Integer distance = sensors.getJSONObject(0).getInt("distance");
                 Integer motion = sensors.getJSONObject(0).getInt("motion");
 
             } catch (JSONException e) {

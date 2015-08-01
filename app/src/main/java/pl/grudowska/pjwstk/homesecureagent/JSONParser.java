@@ -42,7 +42,7 @@ public class JSONParser {
                 Integer gas = sensors.getJSONObject(0).getInt("gas");
                 Integer smoke = sensors.getJSONObject(0).getInt("smoke");
                 Integer carbonMonoxide = sensors.getJSONObject(0).getInt("carbon monoxide");
-                Integer distance = sensors.getJSONObject(0).getInt("distance");
+                // Integer distance = sensors.getJSONObject(0).getInt("distance");
                 Integer motion = sensors.getJSONObject(0).getInt("motion");
 
                 // If app still working - update UI list from thread
@@ -54,7 +54,7 @@ public class JSONParser {
 
                     if (fragment != null) {
                         ArrayList<Sensor> selectedSensors = null;
-                        if(DataStoreManager.isStored(mContext, "objects_sensor")) {
+                        if (DataStoreManager.isStored(mContext, "objects_sensor")) {
                             // Get latest saved sensors list objects and update
                             selectedSensors = DataStoreManager.
                                     loadSensorObjects(mContext);
@@ -102,11 +102,11 @@ public class JSONParser {
                                         selectedSensors.get(i).setStatusSensor(SensorStatusParser.parseValue(check, 0));
                                         break;
                                     }
-                                    case "distance": {
+                                    /*  case "distance": {
                                         selectedSensors.get(i).setValueSensor(Integer.toString(distance) + " unit");
                                         selectedSensors.get(i).setStatusSensor(SensorStatusParser.parseValue(check, 0));
                                         break;
-                                    }
+                                    }*/
                                     default:
                                         break;
                                 }

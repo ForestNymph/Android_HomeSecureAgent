@@ -15,7 +15,7 @@
         <item>Gas</item>
         <item>Smoke</item>
         <item>Carbon monoxide</item>
-        <item>Distance</item>
+<!--    <item>Distance</item>-->
         <item>Motion</item>
     </string-array>
     <string-array name="time_list">

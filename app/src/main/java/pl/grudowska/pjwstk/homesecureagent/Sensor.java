@@ -35,7 +35,7 @@ public class Sensor {
         GAS("Gas"),
         SMOKE("Smoke"),
         CARBON_MONOXIDE("Carbon Monoxide"),
-        DISTANCE("Distance"),
+        // DISTANCE("Distance"),
         MOTION("Motion");
 
         private String stringSensor;
@@ -102,8 +102,8 @@ public class Sensor {
                 SensorState.NONE.toString(), R.drawable.icon_smokefire);
         Sensor carbon_monoxide = new Sensor(SensorType.CARBON_MONOXIDE.toString(), "---",
                 SensorState.NONE.toString(), R.drawable.icon_co2);
-        Sensor distance = new Sensor(SensorType.DISTANCE.toString(), "---",
-                SensorState.NONE.toString(), R.drawable.icon_distance);
+/*        Sensor distance = new Sensor(SensorType.DISTANCE.toString(), "---",
+                SensorState.NONE.toString(), R.drawable.icon_distance);*/
         Sensor motion = new Sensor(SensorType.MOTION.toString(), "---",
                 SensorState.NONE.toString(), R.drawable.icon_motion);
 
@@ -113,7 +113,7 @@ public class Sensor {
         sensorArray.add(gas);
         sensorArray.add(smoke);
         sensorArray.add(carbon_monoxide);
-        sensorArray.add(distance);
+        // sensorArray.add(distance);
         sensorArray.add(motion);
 
         return sensorArray;

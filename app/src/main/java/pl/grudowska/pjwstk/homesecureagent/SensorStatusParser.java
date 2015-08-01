@@ -44,10 +44,10 @@ public class SensorStatusParser {
                 status = Sensor.SensorState.NONE.toString();
                 break;
             }
-            case "distance": {
+            /* case "distance": {
                 status = Sensor.SensorState.NONE.toString();
                 break;
-            }
+            } */
             case "motion": {
                 status = Sensor.SensorState.NONE.toString();
                 break;
