@@ -33,6 +33,7 @@ public class ListSensorFragment extends ListFragment {
             setListAdapter(new SensorsListAdapter(getActivity(),
                     R.layout.sensor_list_row, Sensor.initializeSensorDataCreator()));
         }
+        // updateListTask();
     }
 
     @Override

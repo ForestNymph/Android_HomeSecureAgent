@@ -9,6 +9,7 @@ import android.content.Intent;
 import android.content.IntentFilter;
 import android.os.Bundle;
 import android.os.Handler;
+import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
@@ -104,6 +105,12 @@ public class SensorScreenActivity extends AppCompatActivity
     @Override
     public void onCheckboxSelected(ArrayList<Integer> checkedbox) {
 
+        // Remove old fragment
+        Fragment fragmentToRemove = getSupportFragmentManager().findFragmentByTag("list_fragment");
+        if (fragmentToRemove != null) {
+            getSupportFragmentManager().beginTransaction().remove(fragmentToRemove).commit();
+        }
+
         // Passing data between fragments
         Bundle args = new Bundle();
         args.putIntegerArrayList("checkbox", checkedbox);
@@ -121,7 +128,7 @@ public class SensorScreenActivity extends AppCompatActivity
 
         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
         // Replace whatever is in the fragment_container view with this fragment
-        transaction.replace(R.id.list_content_fragment, fragment);
+        transaction.replace(R.id.list_content_fragment, fragment, "list_fragment");
         transaction.commit();
     }
 
