@@ -8,7 +8,6 @@ import java.util.ArrayList;
 public class Sensor {
 
     public enum SensorState {
-        DANGEROUS("Dengerous"),
         WARNING("Warning"),
         HIGH("High"),
         NORMAL("Normal"),

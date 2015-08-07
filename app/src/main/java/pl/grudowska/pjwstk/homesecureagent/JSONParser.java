@@ -83,23 +83,23 @@ public class JSONParser {
                                         break;
                                     }
                                     case "gas": {
-                                        selectedSensors.get(i).setValueSensor(Integer.toString(gas) + " unit");
-                                        selectedSensors.get(i).setStatusSensor(SensorStatusParser.parseValue(check, 0));
+                                        selectedSensors.get(i).setValueSensor(Integer.toString(gas) + "/100");
+                                        selectedSensors.get(i).setStatusSensor(SensorStatusParser.parseValue(check, gas));
                                         break;
                                     }
                                     case "smoke": {
-                                        selectedSensors.get(i).setValueSensor(Integer.toString(smoke) + " unit");
-                                        selectedSensors.get(i).setStatusSensor(SensorStatusParser.parseValue(check, 0));
+                                        selectedSensors.get(i).setValueSensor(Integer.toString(smoke) + " ppm");
+                                        selectedSensors.get(i).setStatusSensor(SensorStatusParser.parseValue(check, smoke));
                                         break;
                                     }
                                     case "carbon monoxide": {
-                                        selectedSensors.get(i).setValueSensor(Integer.toString(carbonMonoxide) + " unit");
-                                        selectedSensors.get(i).setStatusSensor(SensorStatusParser.parseValue(check, 0));
+                                        selectedSensors.get(i).setValueSensor(Integer.toString(carbonMonoxide) + " ppm");
+                                        selectedSensors.get(i).setStatusSensor(SensorStatusParser.parseValue(check, carbonMonoxide));
                                         break;
                                     }
                                     case "motion": {
-                                        selectedSensors.get(i).setValueSensor(Integer.toString(motion) + " unit");
-                                        selectedSensors.get(i).setStatusSensor(SensorStatusParser.parseValue(check, 0));
+                                        selectedSensors.get(i).setValueSensor((motion == 0) ? "No motion" : "Motion!");
+                                        selectedSensors.get(i).setStatusSensor(SensorStatusParser.parseValue(check, motion));
                                         break;
                                     }
                                     /*  case "distance": {

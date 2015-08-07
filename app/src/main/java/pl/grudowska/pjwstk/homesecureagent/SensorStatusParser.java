@@ -6,7 +6,7 @@ package pl.grudowska.pjwstk.homesecureagent;
 public class SensorStatusParser {
 
     public static String parseValue(String sensor, int value) {
-        String status = null;
+        String status;
         switch (sensor) {
             case "temperature": {
                 if (value <= -5) {
@@ -33,15 +33,29 @@ public class SensorStatusParser {
                 break;
             }
             case "gas": {
-                status = Sensor.SensorState.NONE.toString();
+                if (value <= 25) {
+                    status = Sensor.SensorState.NORMAL.toString();
+                } else if (value > 25 && value < 60) {
+                    status = Sensor.SensorState.HIGH.toString();
+                } else {
+                    status = Sensor.SensorState.WARNING.toString();
+                }
                 break;
             }
             case "smoke": {
-                status = Sensor.SensorState.NONE.toString();
+                if (value == 0) {
+                    status = Sensor.SensorState.NORMAL.toString();
+                } else {
+                    status = Sensor.SensorState.WARNING.toString();
+                }
                 break;
             }
             case "carbon monoxide": {
-                status = Sensor.SensorState.NONE.toString();
+                if (value == 0) {
+                    status = Sensor.SensorState.NORMAL.toString();
+                } else {
+                    status = Sensor.SensorState.WARNING.toString();
+                }
                 break;
             }
             /* case "distance": {
@@ -49,7 +63,11 @@ public class SensorStatusParser {
                 break;
             } */
             case "motion": {
-                status = Sensor.SensorState.NONE.toString();
+                if (value == 0) {
+                    status = Sensor.SensorState.NORMAL.toString();
+                } else {
+                    status = Sensor.SensorState.WARNING.toString();
+                }
                 break;
             }
             default:

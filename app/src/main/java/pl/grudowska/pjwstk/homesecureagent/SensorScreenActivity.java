@@ -9,7 +9,6 @@ import android.content.Intent;
 import android.content.IntentFilter;
 import android.os.Bundle;
 import android.os.Handler;
-import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
@@ -105,11 +104,12 @@ public class SensorScreenActivity extends AppCompatActivity
     @Override
     public void onCheckboxSelected(ArrayList<Integer> checkedbox) {
 
+        // http://stackoverflow.com/questions/22474584/remove-old-fragment-from-fragment-manager
         // Remove old fragment
-        Fragment fragmentToRemove = getSupportFragmentManager().findFragmentByTag("list_fragment");
-        if (fragmentToRemove != null) {
-            getSupportFragmentManager().beginTransaction().remove(fragmentToRemove).commit();
-        }
+        // Fragment fragmentToRemove = getSupportFragmentManager().findFragmentByTag("list_fragment");
+        // if (fragmentToRemove != null) {
+        //     getSupportFragmentManager().beginTransaction().remove(fragmentToRemove).commit();
+        // }
 
         // Passing data between fragments
         Bundle args = new Bundle();
@@ -129,6 +129,7 @@ public class SensorScreenActivity extends AppCompatActivity
         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
         // Replace whatever is in the fragment_container view with this fragment
         transaction.replace(R.id.list_content_fragment, fragment, "list_fragment");
+        transaction.addToBackStack(null);
         transaction.commit();
     }
 
@@ -155,16 +156,7 @@ public class SensorScreenActivity extends AppCompatActivity
         if (interval == 0) {
             stopAlarmService();
         } else {
-            Intent intent = new Intent(SensorScreenActivity.this, AlarmService.class);
-            mPendingIntent = PendingIntent.getService(SensorScreenActivity.this, SERVICE_CODE, intent, 0);
-            AlarmManager alarmManager = (AlarmManager) getSystemService(ALARM_SERVICE);
-            Calendar calendar = Calendar.getInstance();
-            calendar.setTimeInMillis(System.currentTimeMillis());
-            calendar.add(Calendar.SECOND, 0);
-            alarmManager.set(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(), mPendingIntent);
-            alarmManager.setRepeating(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(), interval, mPendingIntent);
-
-            // Toast.makeText(SensorScreenActivity.this, "Start Alarm Service", Toast.LENGTH_SHORT).show();
+            startAlarmService(interval);
         }
         unregisterReceiver(mReceiver);
         super.onStop();
@@ -179,6 +171,18 @@ public class SensorScreenActivity extends AppCompatActivity
 
             // Toast.makeText(SensorScreenActivity.this, "Stop Alarm Service", Toast.LENGTH_SHORT).show();
         }
+    }
+
+    private void startAlarmService(int interval) {
+        Intent intent = new Intent(SensorScreenActivity.this, AlarmService.class);
+        mPendingIntent = PendingIntent.getService(SensorScreenActivity.this, SERVICE_CODE, intent, 0);
+        AlarmManager alarmManager = (AlarmManager) getSystemService(ALARM_SERVICE);
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTimeInMillis(System.currentTimeMillis());
+        calendar.add(Calendar.SECOND, 0);
+        alarmManager.setRepeating(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(), interval, mPendingIntent);
+
+        // Toast.makeText(SensorScreenActivity.this, "Start Alarm Service", Toast.LENGTH_SHORT).show();
     }
 
     public static String adress() {

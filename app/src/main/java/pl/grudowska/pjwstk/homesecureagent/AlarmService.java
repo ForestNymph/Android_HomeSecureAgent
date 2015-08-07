@@ -63,7 +63,7 @@ public class AlarmService extends Service {
         }
 
         public void parseValues(String result) {
-            JSONObject json = null;
+            JSONObject json;
             try {
                 json = new JSONObject(result);
                 JSONArray sensors = json.getJSONArray("sensorList");
@@ -75,13 +75,23 @@ public class AlarmService extends Service {
                 if (SensorStatusParser.parseValue("humidity", humidity).equals("Warning")) {
                     callbackValues("Humidity");
                 }
-                // TODO parse values by scope
                 Integer gas = sensors.getJSONObject(0).getInt("gas");
+                if (SensorStatusParser.parseValue("gas", gas).equals("Warning")) {
+                    callbackValues("Gas");
+                }
                 Integer smoke = sensors.getJSONObject(0).getInt("smoke");
+                if (SensorStatusParser.parseValue("smoke", smoke).equals("Warning")) {
+                    callbackValues("Smoke");
+                }
                 Integer carbonMonoxide = sensors.getJSONObject(0).getInt("carbon monoxide");
-                // Integer distance = sensors.getJSONObject(0).getInt("distance");
+                if (SensorStatusParser.parseValue("carbon monoxide", carbonMonoxide).equals("Warning")) {
+                    callbackValues("Carbon monoxide");
+                }
                 Integer motion = sensors.getJSONObject(0).getInt("motion");
-
+                if (SensorStatusParser.parseValue("motion", motion).equals("Warning")) {
+                    callbackValues("Motion");
+                }
+                // Integer distance = sensors.getJSONObject(0).getInt("distance");
             } catch (JSONException e) {
                 e.printStackTrace();
             }

@@ -20,7 +20,7 @@
     </string-array>
     <string-array name="time_list">
         <item>Turn off notification</item>
-        <item>5 seconds</item>
+        <item>5 seconds (debug)</item>
         <item>10 seconds</item>
         <item>30 seconds</item>
         <item>1 minutes</item>
