@@ -26,10 +26,6 @@ public class JSONParser {
         mResponse = serverResponse;
     }
 
-    public JSONParser(String serverResponse) {
-        mResponse = serverResponse;
-    }
-
     public void start() {
         if (!mResponse.equals("")) {
             try {
@@ -53,7 +49,7 @@ public class JSONParser {
                             findFragmentByTag("list_fragment");
 
                     if (fragment != null) {
-                        ArrayList<Sensor> selectedSensors = null;
+                        ArrayList<Sensor> selectedSensors;
                         if (DataStoreManager.isStored(mContext, "objects_sensor")) {
                             // Get latest saved sensors list objects and update
                             selectedSensors = DataStoreManager.

@@ -60,6 +60,23 @@ public class DataStoreManager {
         return value;
     }
 
+    // To check if server working. If downloaded data has the same timestamp like last time
+    // this means that the server does not reach the latest data from the sensors
+    // Not refreshing warning waking applications will be disabled if any of the sensors
+    // has "Warning" status.
+    public static void saveLastTimestamp(Context context, String key, Long timestamp){
+        SharedPreferences mPrefs = context.getSharedPreferences(key, Context.MODE_PRIVATE);
+        SharedPreferences.Editor prefsEditor = mPrefs.edit();
+        prefsEditor.putLong(key, timestamp);
+        prefsEditor.apply();
+    }
+
+    public static long loadLastTimestamp(Context context, String key){
+        SharedPreferences mPrefs = context.getSharedPreferences(key, Context.MODE_PRIVATE);
+        long value = mPrefs.getLong(key, 0);
+        return value;
+    }
+
     public static boolean isStored(Context context, String key) {
         SharedPreferences mPrefs = context.getSharedPreferences(key, Context.MODE_PRIVATE);
         if (mPrefs.contains(key)) {

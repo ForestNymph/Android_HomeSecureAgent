@@ -51,7 +51,7 @@ public class SensorStatusParser {
                 break;
             }
             case "carbon monoxide": {
-                if (value == 0) {
+                if (value >= 0 && value < 50) {
                     status = Sensor.SensorState.NORMAL.toString();
                 } else {
                     status = Sensor.SensorState.WARNING.toString();

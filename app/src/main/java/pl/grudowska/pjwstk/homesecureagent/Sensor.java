@@ -100,7 +100,7 @@ public class Sensor {
         Sensor smoke = new Sensor(SensorType.SMOKE.toString(), "---",
                 SensorState.NONE.toString(), R.drawable.icon_smokefire);
         Sensor carbon_monoxide = new Sensor(SensorType.CARBON_MONOXIDE.toString(), "---",
-                SensorState.NONE.toString(), R.drawable.icon_co2);
+                SensorState.NONE.toString(), R.drawable.icon_co);
 /*        Sensor distance = new Sensor(SensorType.DISTANCE.toString(), "---",
                 SensorState.NONE.toString(), R.drawable.icon_distance);*/
         Sensor motion = new Sensor(SensorType.MOTION.toString(), "---",
