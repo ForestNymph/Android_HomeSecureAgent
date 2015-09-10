@@ -26,6 +26,7 @@ public class SensorDataDownloader {
             // Create HttpClient
             HttpClient httpclient = new DefaultHttpClient();
             // Make GET request to the given URL
+            HttpResponse a;
             HttpResponse httpResponse = httpclient.execute(new HttpGet(url));
             // Receive response as inputStream
             inputStream = httpResponse.getEntity().getContent();
